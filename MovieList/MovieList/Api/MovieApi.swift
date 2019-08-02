@@ -12,7 +12,7 @@ import AlamofireImage
 
 class MovieApi {
     
-    func requestMovieList() {
+    func requestMovieList(request: Request) {
         Alamofire.request("https://api.themoviedb.org/3/movie/upcoming?api_key=1f54bd990f1cdfb230adb312546d765d&language=en-US&page=1").responseJSON { response in
             
                         if let data = response.data {

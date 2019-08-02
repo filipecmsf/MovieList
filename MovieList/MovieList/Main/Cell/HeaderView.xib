@@ -29,8 +29,8 @@
             </subviews>
             <color key="backgroundColor" name="DarkBlue"/>
             <constraints>
-                <constraint firstItem="EhA-Ee-GLJ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="L6D-08-OyU"/>
-                <constraint firstItem="EhA-Ee-GLJ" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="M4o-KZ-X1e"/>
+                <constraint firstItem="EhA-Ee-GLJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="L6D-08-OyU"/>
+                <constraint firstItem="EhA-Ee-GLJ" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="M4o-KZ-X1e"/>
                 <constraint firstAttribute="bottom" secondItem="EhA-Ee-GLJ" secondAttribute="bottom" id="PFr-Av-lIw"/>
                 <constraint firstItem="EhA-Ee-GLJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="lae-31-Dtc"/>
                 <constraint firstItem="iFH-S4-rSO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="25" id="u8S-Ss-UQN"/>

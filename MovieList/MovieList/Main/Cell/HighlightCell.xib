@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -30,7 +29,7 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                 </subviews>
-                <color key="backgroundColor" name="DarkBlue"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="aD4-ZD-Ifj" firstAttribute="top" secondItem="4Ib-fT-IJz" secondAttribute="top" id="92R-dW-mIa"/>
                     <constraint firstAttribute="bottom" secondItem="aD4-ZD-Ifj" secondAttribute="bottom" constant="20" id="CUV-gF-akg"/>
@@ -45,9 +44,4 @@
             <point key="canvasLocation" x="36.231884057971016" y="103.125"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <namedColor name="DarkBlue">
-            <color red="0.035294117647058823" green="0.043137254901960784" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-    </resources>
 </document>

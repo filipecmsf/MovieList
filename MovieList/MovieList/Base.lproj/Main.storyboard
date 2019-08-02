@@ -35,24 +35,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Qy-OY-bQ0">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="627"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" name="DarkBlue"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CTP-WK-pA8">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="8Qy-OY-bQ0" firstAttribute="height" secondItem="L2M-cJ-sY6" secondAttribute="height" multiplier="0.7" id="0oc-ng-Tbj"/>
+                            <constraint firstItem="8Qy-OY-bQ0" firstAttribute="height" secondItem="L2M-cJ-sY6" secondAttribute="height" id="0oc-ng-Tbj"/>
                             <constraint firstItem="CTP-WK-pA8" firstAttribute="top" secondItem="IFl-Nb-Ix8" secondAttribute="top" id="4Gq-3m-5jO"/>
-                            <constraint firstItem="IFl-Nb-Ix8" firstAttribute="bottom" secondItem="CTP-WK-pA8" secondAttribute="bottom" id="MRH-aq-wOp"/>
+                            <constraint firstAttribute="bottom" secondItem="CTP-WK-pA8" secondAttribute="bottom" id="MRH-aq-wOp"/>
                             <constraint firstItem="8Qy-OY-bQ0" firstAttribute="top" secondItem="L2M-cJ-sY6" secondAttribute="top" id="Oal-Nk-T5m"/>
-                            <constraint firstItem="CTP-WK-pA8" firstAttribute="leading" secondItem="IFl-Nb-Ix8" secondAttribute="leading" id="ZTD-Mv-RPp"/>
-                            <constraint firstItem="IFl-Nb-Ix8" firstAttribute="trailing" secondItem="8Qy-OY-bQ0" secondAttribute="trailing" id="dOo-ln-8u7"/>
-                            <constraint firstItem="8Qy-OY-bQ0" firstAttribute="leading" secondItem="IFl-Nb-Ix8" secondAttribute="leading" id="wyo-Vf-Uz6"/>
-                            <constraint firstItem="IFl-Nb-Ix8" firstAttribute="trailing" secondItem="CTP-WK-pA8" secondAttribute="trailing" id="y05-cs-EPu"/>
+                            <constraint firstItem="CTP-WK-pA8" firstAttribute="leading" secondItem="L2M-cJ-sY6" secondAttribute="leading" id="ZTD-Mv-RPp"/>
+                            <constraint firstItem="CTP-WK-pA8" firstAttribute="trailing" secondItem="8Qy-OY-bQ0" secondAttribute="trailing" id="dOo-ln-8u7"/>
+                            <constraint firstItem="8Qy-OY-bQ0" firstAttribute="leading" secondItem="L2M-cJ-sY6" secondAttribute="leading" id="wyo-Vf-Uz6"/>
+                            <constraint firstAttribute="trailing" secondItem="CTP-WK-pA8" secondAttribute="trailing" id="y05-cs-EPu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IFl-Nb-Ix8"/>
                     </view>
