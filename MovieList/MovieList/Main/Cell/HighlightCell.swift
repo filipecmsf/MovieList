@@ -21,9 +21,9 @@ class HighlightCell: UITableViewCell {
         }
     }
     
-    private var hightlightMovieList: [Movie] = []
+    private var hightlightMovieList: [MainMovieViewEntity] = []
     
-    func setData(list: [Movie]) {
+    func setData(list: [MainMovieViewEntity]) {
         hightlightMovieList = list
         highlightCollectionView.reloadData()
     }

@@ -32,20 +32,25 @@ class MovieCell: UITableViewCell {
         }
     }
     
-    func setData(title: String, release: String, image: String?) {
-        titleLabel.text = title
-        releaseDateLabel.text = release
-        
-        guard let imagePath = image else {
-            return
+    @IBOutlet weak var genresLabel: UILabel! {
+        didSet {
+            genresLabel.font = UIFont.createFont(font: .MovieListSourceSansProRegular, size: 15)
+            genresLabel.textColor = UIColor.createColor(color: .MovieListDarkGray)
+            genresLabel.numberOfLines = 2
         }
+    }
+    
+    func setData(movieViewEntity: MainMovieViewEntity) {
+        titleLabel.text = movieViewEntity.title
+        releaseDateLabel.text = movieViewEntity.releaseDate
+        genresLabel.text = movieViewEntity.genreList.joined(separator: ", ")
         
         guard let url = Bundle.getValueFromInfo(key: .imageUrl) else {
             // TODO: show error
             return
         }
         
-        let urlString = String(format:"%@%@",url, imagePath)
+        let urlString = String(format:"%@%@",url, movieViewEntity.posterPath)
         coverImage.af_setImage(withURL: URL(string: urlString)!)
     }
     

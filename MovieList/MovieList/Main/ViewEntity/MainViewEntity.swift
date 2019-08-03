@@ -9,6 +9,6 @@
 import Foundation
 
 struct MainViewEntity {
-    let movieList: [Movie]
+    let movieList: [MainMovieViewEntity]
     let highlightList: [Int]
 }

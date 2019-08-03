@@ -12,7 +12,7 @@ class MainInteractor {
     
     // MARK: - properties
     var page: Int
-    var movieList: [Movie] = []
+    var movieList: [MainMovieViewEntity] = []
     var genreList: [Genre] = []
     var highlightList: [Int] = []
     
@@ -27,19 +27,45 @@ class MainInteractor {
     
     // MARK: - private methods
     // TODO: implement method return
-    private func createQueryItems() -> [String: String] {
-        return [:]
-    }
     
     private func updateMovieList(movieListObj: MovieList) {
         
-        movieList.append(contentsOf: movieListObj.results)
+        movieList.append(contentsOf: createMainMovieViewEntity(movieList: movieListObj.results))
         
         if highlightList.isEmpty {
             highlightList = createHighlightList()
         }
         
         updateList?(MainViewEntity(movieList: movieList, highlightList: highlightList))
+    }
+    
+    private func createMainMovieViewEntity(movieList: [Movie]) -> [MainMovieViewEntity] {
+        var mainMovieViewEntityList: [MainMovieViewEntity] = []
+        
+        for movie in movieList {
+            let genres = getGenresNames(genres: movie.genreIds)
+            
+            let mainMovieViewEntity = MainMovieViewEntity(title: movie.title, releaseDate: movie.releaseDate, posterPath: movie.posterPath, genreList: genres)
+            
+            mainMovieViewEntityList.append(mainMovieViewEntity)
+        }
+        
+        return mainMovieViewEntityList
+    }
+    
+    private func getGenresNames(genres: [Int]) -> [String] {
+        var genreNameList: [String] = []
+        
+        for id in genres {
+            
+            guard let genre = genreList.first(where: {$0.id == id}) else {
+                break
+            }
+            
+            genreNameList.append(genre.name)
+        }
+        
+        return genreNameList
     }
     
     private func createHighlightList() -> [Int] {
@@ -53,6 +79,10 @@ class MainInteractor {
         } while highlightList.count < 5
         
         return highlightList.sorted(by: { $0 < $1 })
+    }
+    
+    private func createQueryItems() -> [String: String] {
+        return [:]
     }
     
     // MARK: - public methods

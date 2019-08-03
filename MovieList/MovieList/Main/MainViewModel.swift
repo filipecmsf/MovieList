@@ -38,7 +38,8 @@ class MainViewModel {
         }
     }
     
-    private func getMovie(index: Int) -> Movie? {
+    // MARK: - public methods
+    func getMovie(index: Int) -> MainMovieViewEntity? {
         if let movie = viewEntity?.movieList[index] {
             return movie
         }
@@ -46,13 +47,12 @@ class MainViewModel {
         return nil
     }
     
-    // MARK: - public methods
     func getListCount() -> Int {
         return viewEntity?.movieList.count ?? 0
     }
     
-    func getHighlightList() -> [Movie] {
-        var highlightList: [Movie] = []
+    func getHighlightList() -> [MainMovieViewEntity] {
+        var highlightList: [MainMovieViewEntity] = []
         
         guard let list = viewEntity?.highlightList else {
             return []
@@ -65,29 +65,5 @@ class MainViewModel {
         }
         
         return highlightList
-    }
-    
-    func getMovieName(index: Int) -> String {
-        if let movie = getMovie(index: index) {
-            return movie.title
-        }
-        
-        return "--"
-    }
-    
-    func getMovieReleaseDate(index: Int) -> String {
-        if let movie = getMovie(index: index) {
-            return movie.releaseDate
-        }
-        
-        return "--"
-    }
-    
-    func getImagePath(index: Int) -> String? {
-        if let movie = getMovie(index: index) {
-            return movie.posterPath
-        }
-        
-        return nil
     }
 }

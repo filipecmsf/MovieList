@@ -89,9 +89,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             let row = indexPath.row
             
             updateBackgroundViewColor(cellIndex: row)
-            
-            cell.setData(title: viewModel.getMovieName(index: row), release: viewModel.getMovieReleaseDate(index: row), image: viewModel.getImagePath(index: row))
-            return cell
+            if let movie = viewModel.getMovie(index: row) {
+                cell.setData(movieViewEntity: movie)
+                return cell
+            }
         }
         
         return UITableViewCell()

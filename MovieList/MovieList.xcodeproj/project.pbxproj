@@ -36,6 +36,7 @@
 		85C12DAA22F5D0D1007F8888 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C12DA922F5D0D1007F8888 /* DetailViewController.swift */; };
 		85C12DAC22F5F7C7007F8888 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C12DAB22F5F7C7007F8888 /* Genre.swift */; };
 		85C12DAE22F5FC29007F8888 /* GenreList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C12DAD22F5FC29007F8888 /* GenreList.swift */; };
+		85C12DB122F5FDAF007F8888 /* MainMovieViewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C12DB022F5FDAF007F8888 /* MainMovieViewEntity.swift */; };
 		85D188F422F4E8C900E819D4 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D188F322F4E8C900E819D4 /* MainViewModel.swift */; };
 		85D188F622F4E8F100E819D4 /* MainViewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D188F522F4E8F100E819D4 /* MainViewEntity.swift */; };
 		85D188F822F4E9BA00E819D4 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D188F722F4E9BA00E819D4 /* MainInteractor.swift */; };
@@ -89,6 +90,7 @@
 		85C12DA922F5D0D1007F8888 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		85C12DAB22F5F7C7007F8888 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		85C12DAD22F5FC29007F8888 /* GenreList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreList.swift; sourceTree = "<group>"; };
+		85C12DB022F5FDAF007F8888 /* MainMovieViewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMovieViewEntity.swift; sourceTree = "<group>"; };
 		85D188F322F4E8C900E819D4 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		85D188F522F4E8F100E819D4 /* MainViewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewEntity.swift; sourceTree = "<group>"; };
 		85D188F722F4E9BA00E819D4 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
@@ -163,11 +165,11 @@
 		8564606A22F39A22008904BE /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				8564607622F3A1C3008904BE /* Cell */,
+				85C12DAF22F5FD91007F8888 /* ViewEntity */,
 				8564605A22F39906008904BE /* MainViewController.swift */,
 				85D188F322F4E8C900E819D4 /* MainViewModel.swift */,
-				85D188F522F4E8F100E819D4 /* MainViewEntity.swift */,
 				85D188F722F4E9BA00E819D4 /* MainInteractor.swift */,
-				8564607622F3A1C3008904BE /* Cell */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -255,6 +257,15 @@
 				85C12D8922F5B348007F8888 /* Bundle.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		85C12DAF22F5FD91007F8888 /* ViewEntity */ = {
+			isa = PBXGroup;
+			children = (
+				85D188F522F4E8F100E819D4 /* MainViewEntity.swift */,
+				85C12DB022F5FDAF007F8888 /* MainMovieViewEntity.swift */,
+			);
+			path = ViewEntity;
 			sourceTree = "<group>";
 		};
 		85D188FB22F5AC8600E819D4 /* Config */ = {
@@ -437,6 +448,7 @@
 				8564609722F3AB45008904BE /* UIFont.swift in Sources */,
 				85D188F422F4E8C900E819D4 /* MainViewModel.swift in Sources */,
 				85D188F622F4E8F100E819D4 /* MainViewEntity.swift in Sources */,
+				85C12DB122F5FDAF007F8888 /* MainMovieViewEntity.swift in Sources */,
 				85C12DAC22F5F7C7007F8888 /* Genre.swift in Sources */,
 				85A24AFF22F3C40D000418F2 /* UIColor.swift in Sources */,
 				85D188F822F4E9BA00E819D4 /* MainInteractor.swift in Sources */,
