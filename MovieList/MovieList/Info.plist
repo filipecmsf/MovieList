@@ -56,5 +56,7 @@
 	<string>https://$(BASE_URL)</string>
 	<key>image_url</key>
 	<string>https://$(IMAGE_URL)</string>
+	<key>api_key</key>
+	<string>$(API_KEY)</string>
 </dict>
 </plist>

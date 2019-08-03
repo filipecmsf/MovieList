@@ -13,4 +13,5 @@
 
 BASE_URL = api.themoviedb.org/3/movie/upcoming
 IMAGE_URL = image.tmdb.org/t/p/w500
-APP_NAME = MovieLovers
+APP_NAME = MovieLove
+API_KEY = 1f54bd990f1cdfb230adb312546d765d

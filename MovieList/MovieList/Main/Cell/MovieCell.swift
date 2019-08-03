@@ -10,7 +10,15 @@ import UIKit
 
 class MovieCell: UITableViewCell {
     
-    @IBOutlet private weak var coverImage: UIImageView!
+    @IBOutlet private weak var coverImage: UIImageView! {
+        didSet {
+            coverImage.backgroundColor = UIColor.clear
+            coverImage.contentMode = .scaleAspectFit
+            coverImage.layer.borderColor = UIColor.black.cgColor
+            coverImage.layer.borderWidth = 2
+            coverImage.layer.cornerRadius = 5
+        }
+    }
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
             titleLabel.font = UIFont.createFont(font: .MovieListSourceSansProBold, size: 20)

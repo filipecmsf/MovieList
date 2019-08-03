@@ -14,6 +14,9 @@ class HighlightCollectionItemCell: UICollectionViewCell {
         didSet {
             backgroundImage.backgroundColor = UIColor.clear
             backgroundImage.contentMode = .scaleAspectFit
+            backgroundImage.layer.borderColor = UIColor.createColor(color: .MovieListLightBeige).cgColor
+            backgroundImage.layer.borderWidth = 2
+            backgroundImage.layer.cornerRadius = 5
         }
     }
     

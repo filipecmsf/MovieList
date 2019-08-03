@@ -11,6 +11,7 @@ import Foundation
 enum ConfigKey: String {
     case baseUrl = "base_url"
     case imageUrl = "image_url"
+    case apiKey = "api_key"
 }
 
 extension Bundle {

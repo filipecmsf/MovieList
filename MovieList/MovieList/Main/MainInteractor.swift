@@ -22,14 +22,15 @@ class MainInteractor {
     
     func getMovies() {
         
-        guard let url = Bundle.getValueFromInfo(key: .baseUrl) else {
+        guard let url = Bundle.getValueFromInfo(key: .baseUrl),
+        let apiKey = Bundle.getValueFromInfo(key: .apiKey) else {
             // TODO: show error
             return
         }
         
         let request = Request(endPoint: url,
                               method: .get,
-                              queryItems: ["api_key":"1f54bd990f1cdfb230adb312546d765d", "page": String(page)],
+                              queryItems: ["api_key":apiKey, "page": String(page)],
                               header: nil)
         
         MovieApi().requestMovieList(request: request) { (data, error) in

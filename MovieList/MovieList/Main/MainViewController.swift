@@ -6,11 +6,13 @@
 //  Copyright © 2019 Filipe Faria. All rights reserved.
 //
 
+
+
 import UIKit
 import Alamofire
 
 class MainViewController: UIViewController {
-    
+// MARK: - properties
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.delegate = self
@@ -26,7 +28,13 @@ class MainViewController: UIViewController {
     
     private var viewModel: MainViewModel = MainViewModel()
     
+    @IBOutlet weak var backgroundView: UIView! {
+        didSet {
+            backgroundView.backgroundColor = UIColor.createColor(color: .MovieListDarkBlue)
+        }
+    }
     
+    // MARK: - setup methods
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -35,16 +43,33 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         implementViewModel()
-        
     }
     
-    func implementViewModel() {
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("PEFORM")
+    }
+    
+    // MARK: - private methods
+    private func implementViewModel() {
         viewModel.reloadTableView = {[weak self] in
             self?.tableView.reloadData()
         }
     }
+    
+    private func updateBackgroundViewColor(cellIndex: Int) {
+        if cellIndex == 0 {
+            backgroundView.backgroundColor = UIColor.createColor(color: .MovieListDarkBlue)
+        } else if cellIndex == viewModel.getListCount() - 1 {
+            backgroundView.backgroundColor = UIColor.white
+        }
+    }
 }
 
+// MARK: - extensions
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -62,6 +87,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else if let cell: MovieCell = tableView.dequeueReusableCell(withIdentifier: "MovieCell") as? MovieCell {
             let row = indexPath.row
+            
+            updateBackgroundViewColor(cellIndex: row)
+            
             cell.setData(title: viewModel.getMovieName(index: row), release: viewModel.getMovieReleaseDate(index: row), image: viewModel.getImagePath(index: row))
             return cell
         }
@@ -88,6 +116,17 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 80
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            return
+        }
+        guard let cell: MovieCell = tableView.cellForRow(at: indexPath) as? MovieCell else {
+            return
+        }
+        
+        self.performSegue(withIdentifier: "movieDetailSegue", sender: cell)
     }
 }
 
