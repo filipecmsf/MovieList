@@ -10,13 +10,13 @@ import UIKit
 
 class MovieCell: UITableViewCell {
     
-    @IBOutlet private weak var coverImage: UIImageView! {
+    @IBOutlet private weak var posterImage: UIImageView! {
         didSet {
-            coverImage.backgroundColor = UIColor.clear
-            coverImage.contentMode = .scaleAspectFit
-            coverImage.layer.borderColor = UIColor.black.cgColor
-            coverImage.layer.borderWidth = 2
-            coverImage.layer.cornerRadius = 5
+            posterImage.backgroundColor = UIColor.clear
+            posterImage.contentMode = .scaleAspectFit
+            posterImage.layer.borderColor = UIColor.black.cgColor
+            posterImage.layer.borderWidth = 2
+            posterImage.layer.cornerRadius = 5
         }
     }
     @IBOutlet private weak var titleLabel: UILabel! {
@@ -51,7 +51,7 @@ class MovieCell: UITableViewCell {
         }
         
         let urlString = String(format:"%@%@",url, movieViewEntity.posterPath)
-        coverImage.af_setImage(withURL: URL(string: urlString)!)
+        posterImage.af_setImage(withURL: URL(string: urlString)!)
     }
     
 }

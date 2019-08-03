@@ -37,6 +37,8 @@
 		85C12DAC22F5F7C7007F8888 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C12DAB22F5F7C7007F8888 /* Genre.swift */; };
 		85C12DAE22F5FC29007F8888 /* GenreList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C12DAD22F5FC29007F8888 /* GenreList.swift */; };
 		85C12DB122F5FDAF007F8888 /* MainMovieViewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C12DB022F5FDAF007F8888 /* MainMovieViewEntity.swift */; };
+		85C12DB522F610A9007F8888 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C12DB422F610A9007F8888 /* DetailViewModel.swift */; };
+		85C12DB822F610DA007F8888 /* DetailViewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C12DB722F610DA007F8888 /* DetailViewEntity.swift */; };
 		85D188F422F4E8C900E819D4 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D188F322F4E8C900E819D4 /* MainViewModel.swift */; };
 		85D188F622F4E8F100E819D4 /* MainViewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D188F522F4E8F100E819D4 /* MainViewEntity.swift */; };
 		85D188F822F4E9BA00E819D4 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D188F722F4E9BA00E819D4 /* MainInteractor.swift */; };
@@ -91,6 +93,8 @@
 		85C12DAB22F5F7C7007F8888 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		85C12DAD22F5FC29007F8888 /* GenreList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreList.swift; sourceTree = "<group>"; };
 		85C12DB022F5FDAF007F8888 /* MainMovieViewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMovieViewEntity.swift; sourceTree = "<group>"; };
+		85C12DB422F610A9007F8888 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailViewModel.swift; path = /Users/filipefaria/Documents/XCodeProject/ArcTouchTest/MovieList/MovieList/MovieList/MovieList/Detail/DetailViewModel.swift; sourceTree = "<absolute>"; };
+		85C12DB722F610DA007F8888 /* DetailViewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewEntity.swift; sourceTree = "<group>"; };
 		85D188F322F4E8C900E819D4 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		85D188F522F4E8F100E819D4 /* MainViewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewEntity.swift; sourceTree = "<group>"; };
 		85D188F722F4E9BA00E819D4 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
@@ -177,7 +181,9 @@
 		8564606C22F39A4A008904BE /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				85C12DB622F610B4007F8888 /* ViewEntity */,
 				85C12DA922F5D0D1007F8888 /* DetailViewController.swift */,
+				85C12DB422F610A9007F8888 /* DetailViewModel.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -264,6 +270,14 @@
 			children = (
 				85D188F522F4E8F100E819D4 /* MainViewEntity.swift */,
 				85C12DB022F5FDAF007F8888 /* MainMovieViewEntity.swift */,
+			);
+			path = ViewEntity;
+			sourceTree = "<group>";
+		};
+		85C12DB622F610B4007F8888 /* ViewEntity */ = {
+			isa = PBXGroup;
+			children = (
+				85C12DB722F610DA007F8888 /* DetailViewEntity.swift */,
 			);
 			path = ViewEntity;
 			sourceTree = "<group>";
@@ -448,6 +462,8 @@
 				8564609722F3AB45008904BE /* UIFont.swift in Sources */,
 				85D188F422F4E8C900E819D4 /* MainViewModel.swift in Sources */,
 				85D188F622F4E8F100E819D4 /* MainViewEntity.swift in Sources */,
+				85C12DB822F610DA007F8888 /* DetailViewEntity.swift in Sources */,
+				85C12DB522F610A9007F8888 /* DetailViewModel.swift in Sources */,
 				85C12DB122F5FDAF007F8888 /* MainMovieViewEntity.swift in Sources */,
 				85C12DAC22F5F7C7007F8888 /* Genre.swift in Sources */,
 				85A24AFF22F3C40D000418F2 /* UIColor.swift in Sources */,
@@ -622,7 +638,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = P2KT7G76VC;
 				INFOPLIST_FILE = MovieList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -641,7 +657,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = P2KT7G76VC;
 				INFOPLIST_FILE = MovieList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

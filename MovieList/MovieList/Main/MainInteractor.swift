@@ -11,10 +11,11 @@ import Foundation
 class MainInteractor {
     
     // MARK: - properties
-    var page: Int
-    var movieList: [MainMovieViewEntity] = []
-    var genreList: [Genre] = []
-    var highlightList: [Int] = []
+    private var page: Int
+    private var movieList: [Movie] = []
+    private var movieViewEntityList: [MainMovieViewEntity] = []
+    private var genreList: [Genre] = []
+    private var highlightList: [Int] = []
     
     var updateList: ((MainViewEntity) -> Void)?
     var genresLoaded: (() -> Void)?
@@ -26,17 +27,15 @@ class MainInteractor {
     }
     
     // MARK: - private methods
-    // TODO: implement method return
-    
     private func updateMovieList(movieListObj: MovieList) {
-        
-        movieList.append(contentsOf: createMainMovieViewEntity(movieList: movieListObj.results))
+        movieList.append(contentsOf: movieListObj.results)
+        movieViewEntityList.append(contentsOf: createMainMovieViewEntity(movieList: movieListObj.results))
         
         if highlightList.isEmpty {
             highlightList = createHighlightList()
         }
         
-        updateList?(MainViewEntity(movieList: movieList, highlightList: highlightList))
+        updateList?(MainViewEntity(movieList: movieViewEntityList, highlightList: highlightList))
     }
     
     private func createMainMovieViewEntity(movieList: [Movie]) -> [MainMovieViewEntity] {
@@ -45,7 +44,7 @@ class MainInteractor {
         for movie in movieList {
             let genres = getGenresNames(genres: movie.genreIds)
             
-            let mainMovieViewEntity = MainMovieViewEntity(title: movie.title, releaseDate: movie.releaseDate, posterPath: movie.posterPath, genreList: genres)
+            let mainMovieViewEntity = MainMovieViewEntity(id: movie.id, title: movie.title, releaseDate: movie.releaseDate, posterPath: movie.posterPath, genreList: genres)
             
             mainMovieViewEntityList.append(mainMovieViewEntity)
         }
@@ -72,7 +71,7 @@ class MainInteractor {
         var highlightList: [Int] = []
         
         repeat {
-            let position = Int.random(in: 0 ..< movieList.count)
+            let position = Int.random(in: 0 ..< movieViewEntityList.count)
             if !highlightList.contains(position) {
                 highlightList.append(position)
             }
@@ -81,11 +80,17 @@ class MainInteractor {
         return highlightList.sorted(by: { $0 < $1 })
     }
     
+    // TODO: implement method return
     private func createQueryItems() -> [String: String] {
         return [:]
     }
     
     // MARK: - public methods
+    
+    func getMovieBy(id: Int) -> Movie? {
+        return movieList.first(where: { $0.id == id })
+    }
+    
     func getMovies() {
         
         guard let baseUrl = Bundle.getValueFromInfo(key: .baseUrl),

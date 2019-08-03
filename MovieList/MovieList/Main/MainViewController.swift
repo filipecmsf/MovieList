@@ -12,6 +12,7 @@ import UIKit
 import Alamofire
 
 class MainViewController: UIViewController {
+    
 // MARK: - properties
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
@@ -25,7 +26,7 @@ class MainViewController: UIViewController {
             tableView.register(UINib(nibName: "MovieCell", bundle: .main), forCellReuseIdentifier: "MovieCell")
         }
     }
-    
+    private let detailViewSegueIdentifier = "movieDetailSegue"
     private var viewModel: MainViewModel = MainViewModel()
     
     @IBOutlet weak var backgroundView: UIView! {
@@ -45,12 +46,12 @@ class MainViewController: UIViewController {
         implementViewModel()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.isNavigationBarHidden = true
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print(sender)
+        if segue.identifier == detailViewSegueIdentifier,
+            let detailViewEntity = sender as?DetailViewEntity,
+            let detailViewController = segue.destination as? DetailViewController {
+            detailViewController.setViewEntity(detailViewEntity: detailViewEntity)
+        }
     }
     
     // MARK: - private methods
@@ -67,11 +68,19 @@ class MainViewController: UIViewController {
             backgroundView.backgroundColor = UIColor.white
         }
     }
+    
+    private func openMovieDetails(id: Int) {
+        
+        if let detailViewEntity = viewModel.getDetailViewEntity(id: id) {
+            performSegue(withIdentifier: detailViewSegueIdentifier, sender: detailViewEntity)
+        }
+    }
 }
 
 // MARK: - extensions
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
+    // MARK: - TABLEVIEW METHODS
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -82,14 +91,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0, let cell: HighlightCell = tableView.dequeueReusableCell(withIdentifier: "HighlightCell") as? HighlightCell {
-            cell.setData(list: viewModel.getHighlightList())
+        if indexPath.section == 0, let cell = createHighlightCell() {
             return cell
         } else if let cell: MovieCell = tableView.dequeueReusableCell(withIdentifier: "MovieCell") as? MovieCell {
             let row = indexPath.row
             
             updateBackgroundViewColor(cellIndex: row)
-            if let movie = viewModel.getMovie(index: row) {
+            if let movie = viewModel.getMovieBy(index: row) {
                 cell.setData(movieViewEntity: movie)
                 return cell
             }
@@ -124,7 +132,24 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        self.performSegue(withIdentifier: "movieDetailSegue", sender: indexPath.row)
+        if let id = viewModel.getMovieBy(index: indexPath.row)?.id {
+            openMovieDetails(id: id)
+        }
     }
+    
+    // MARK: - AUXILIAR METHODS
+    private func createHighlightCell() -> HighlightCell? {
+        if let cell: HighlightCell = tableView.dequeueReusableCell(withIdentifier: "HighlightCell") as? HighlightCell {
+            cell.setData(list: viewModel.getHighlightList())
+            cell.selectedMovieId = {[weak self] id in
+                self?.openMovieDetails(id: id)
+            }
+            return cell
+        }
+        return nil
+    }
+    
+    
+    
 }
 

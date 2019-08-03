@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/filipefaria/Documents/XCodeProject/ArcTouchTest/MovieList/MovieList/MovieList/MovieList/Detail/DetailViewModel.swift">
+   </FileRef>
+   <FileRef
       location = "group:MovieList.xcodeproj">
    </FileRef>
    <FileRef

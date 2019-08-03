@@ -10,6 +10,9 @@ import UIKit
 
 class HighlightCell: UITableViewCell {
     
+    var selectedMovieId: ((Int) -> Void)?
+    private var hightlightMovieList: [MainMovieViewEntity] = []
+    
     @IBOutlet weak var highlightCollectionView: UICollectionView! {
         didSet {
             highlightCollectionView.delegate = self
@@ -20,8 +23,6 @@ class HighlightCell: UITableViewCell {
             highlightCollectionView.register(UINib(nibName: "HighlightCollectionItemCell", bundle: .main), forCellWithReuseIdentifier: "HighlightCollectionItemCell")
         }
     }
-    
-    private var hightlightMovieList: [MainMovieViewEntity] = []
     
     func setData(list: [MainMovieViewEntity]) {
         hightlightMovieList = list
@@ -42,7 +43,7 @@ extension HighlightCell: UICollectionViewDelegate, UICollectionViewDataSource, U
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HighlightCollectionItemCell", for: indexPath) as? HighlightCollectionItemCell {
             
-            cell.setData(title: hightlightMovieList[indexPath.row].title, image: hightlightMovieList[indexPath.row].posterPath)
+            cell.setData(mainMovieViewEntity: hightlightMovieList[indexPath.row])
             
             return cell
         }
@@ -51,5 +52,9 @@ extension HighlightCell: UICollectionViewDelegate, UICollectionViewDataSource, U
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedMovieId?(hightlightMovieList[indexPath.row].id)
     }
 }

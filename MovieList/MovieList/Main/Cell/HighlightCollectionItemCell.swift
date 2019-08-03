@@ -29,15 +29,15 @@ class HighlightCollectionItemCell: UICollectionViewCell {
         }
     }
     
-    func setData(title: String, image: String) {
-        titleLabel.text = title
+    func setData(mainMovieViewEntity: MainMovieViewEntity) {
+        titleLabel.text = mainMovieViewEntity.title
         
         guard let url = Bundle.getValueFromInfo(key: .imageUrl) else {
             // TODO: show error
             return
         }
         
-        let urlString = String(format:"%@%@",url, image)
+        let urlString = String(format:"%@%@",url, mainMovieViewEntity.posterPath)
         backgroundImage.af_setImage(withURL: URL(string: urlString)!)
     }
     

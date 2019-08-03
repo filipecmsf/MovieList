@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -48,6 +49,13 @@
                             </label>
                         </subviews>
                     </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bYz-jW-xqt">
+                        <rect key="frame" x="5" y="128.5" width="574" height="1"/>
+                        <color key="backgroundColor" name="MediumGray"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="mBr-8S-hdY"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="UNU-8z-eP2" firstAttribute="top" secondItem="2R2-RY-Dtg" secondAttribute="top" constant="5" id="JUA-Ok-n7M"/>
@@ -55,16 +63,24 @@
                     <constraint firstAttribute="bottom" secondItem="UNU-8z-eP2" secondAttribute="bottom" constant="5" id="V79-3e-Ct6"/>
                     <constraint firstItem="UNU-8z-eP2" firstAttribute="leading" secondItem="2R2-RY-Dtg" secondAttribute="leading" constant="20" id="ZuR-c5-ryz"/>
                     <constraint firstItem="Jwb-yc-Cd7" firstAttribute="top" secondItem="UNU-8z-eP2" secondAttribute="top" id="eqm-dL-iZr"/>
+                    <constraint firstAttribute="trailing" secondItem="bYz-jW-xqt" secondAttribute="trailing" constant="30" id="rOK-1D-2OA"/>
                     <constraint firstItem="Jwb-yc-Cd7" firstAttribute="leading" secondItem="UNU-8z-eP2" secondAttribute="trailing" constant="10" id="rx2-P9-aTJ"/>
+                    <constraint firstAttribute="bottom" secondItem="bYz-jW-xqt" secondAttribute="bottom" id="tCN-Gf-Etq"/>
+                    <constraint firstItem="bYz-jW-xqt" firstAttribute="leading" secondItem="2R2-RY-Dtg" secondAttribute="leading" constant="5" id="zmB-na-R3O"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="coverImage" destination="UNU-8z-eP2" id="9bb-Ux-zNj"/>
                 <outlet property="genresLabel" destination="Zr5-9N-uPq" id="GTg-yt-c30"/>
+                <outlet property="posterImage" destination="UNU-8z-eP2" id="9bb-Ux-zNj"/>
                 <outlet property="releaseDateLabel" destination="nur-Nv-niZ" id="sgM-aD-2FF"/>
                 <outlet property="titleLabel" destination="5pk-0B-zJo" id="tNt-uc-4Wn"/>
             </connections>
             <point key="canvasLocation" x="270.28985507246381" y="99.776785714285708"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="MediumGray">
+            <color red="0.32156862745098042" green="0.31372549019607843" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

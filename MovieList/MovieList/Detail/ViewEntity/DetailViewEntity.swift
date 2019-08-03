@@ -1,5 +1,5 @@
 //
-//  MainMovieViewEntity.swift
+//  DetailViewEntity.swift
 //  MovieList
 //
 //  Created by Filipe Faria on 03/08/19.
@@ -7,11 +7,12 @@
 //
 
 import Foundation
-
-struct MainMovieViewEntity {
-    let id: Int
+struct DetailViewEntity {
     let title: String
-    let releaseDate: String
     let posterPath: String
-    let genreList: [String]
+    let genresList: [String]
+    let releaseDate: String
+    let overview: String
+    let voteAverage: Float
 }
+

@@ -39,12 +39,23 @@ class MainViewModel {
     }
     
     // MARK: - public methods
-    func getMovie(index: Int) -> MainMovieViewEntity? {
+    func getMovieBy(index: Int) -> MainMovieViewEntity? {
         if let movie = viewEntity?.movieList[index] {
             return movie
         }
         
         return nil
+    }
+    
+    func getDetailViewEntity(id: Int) -> DetailViewEntity? {
+        guard let movie = interactor.getMovieBy(id: id),
+        let genderList = viewEntity?.movieList.first(where: {$0.id == id})?.genreList else {
+            return nil
+        }
+        
+        let detailViewEntity = DetailViewEntity(title: movie.title, posterPath: movie.posterPath, genresList: genderList, releaseDate: movie.releaseDate, overview: movie.overview, voteAverage: movie.voteAverage)
+        
+        return detailViewEntity
     }
     
     func getListCount() -> Int {
@@ -59,7 +70,7 @@ class MainViewModel {
         }
         
         for position in list {
-            if let movie = getMovie(index: position) {
+            if let movie = getMovieBy(index: position) {
                 highlightList.append(movie)
             }
         }
