@@ -27,6 +27,14 @@ class MovieCell: UITableViewCell {
     func setData(title: String, release: String, image: String?) {
         titleLabel.text = title
         releaseDateLabel.text = release
+        
+        guard let imagePath = image else {
+            return
+        }
+        
+        // FIXME: MOVE URL TO A BETTER PLACE
+        let urlString = String(format:"https://image.tmdb.org/t/p/w500%@", imagePath)
+        coverImage.af_setImage(withURL: URL(string: urlString)!)
     }
     
 }

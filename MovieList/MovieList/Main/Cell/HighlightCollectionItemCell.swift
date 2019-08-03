@@ -22,8 +22,12 @@ class HighlightCollectionItemCell: UICollectionViewCell {
         }
     }
     
-    func setData(title: String) {
+    func setData(title: String, image: String) {
+        
         titleLabel.text = title
+        
+        let urlString = String(format:"https://image.tmdb.org/t/p/w500%@", image)
+        backgroundImage.af_setImage(withURL: URL(string: urlString)!)
     }
     
 }

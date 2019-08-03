@@ -16,7 +16,7 @@ class HighlightCell: UITableViewCell {
             highlightCollectionView.dataSource = self
             highlightCollectionView.backgroundColor = UIColor.createColor(color: .MovieListDarkBlue)
             
-            highlightCollectionView.contentInset = UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 40)
+            highlightCollectionView.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
             highlightCollectionView.register(UINib(nibName: "HighlightCollectionItemCell", bundle: .main), forCellWithReuseIdentifier: "HighlightCollectionItemCell")
         }
     }
@@ -42,7 +42,7 @@ extension HighlightCell: UICollectionViewDelegate, UICollectionViewDataSource, U
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HighlightCollectionItemCell", for: indexPath) as? HighlightCollectionItemCell {
             
-            cell.setData(title: hightlightMovieList[indexPath.row].title)
+            cell.setData(title: hightlightMovieList[indexPath.row].title, image: hightlightMovieList[indexPath.row].posterPath)
             
             return cell
         }
