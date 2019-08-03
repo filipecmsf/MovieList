@@ -17,6 +17,7 @@ struct Movie: Decodable {
     let overview: String
     let posterPath: String
     let releaseDate: String
+    let genreIds: [Int]
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -27,5 +28,6 @@ struct Movie: Decodable {
         case overview = "overview"
         case posterPath = "poster_path"
         case releaseDate = "release_date"
+        case genreIds = "genre_ids"
     }
 }

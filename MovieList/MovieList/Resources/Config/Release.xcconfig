@@ -11,7 +11,9 @@
 
 #include "Pods/Target Support Files/Pods-MovieList/Pods-MovieList.debug.xcconfig"
 
-BASE_URL = api.themoviedb.org/3/movie/upcoming
+BASE_URL = api.themoviedb.org/3/
+MOVIE_URL = movie/upcoming
+GENRE_URL = genre/movie/list
 IMAGE_URL = image.tmdb.org/t/p/w500
 APP_NAME = MovieLove
 API_KEY = 1f54bd990f1cdfb230adb312546d765d

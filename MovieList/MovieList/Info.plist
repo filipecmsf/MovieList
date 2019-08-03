@@ -54,6 +54,10 @@
 	</array>
 	<key>base_url</key>
 	<string>https://$(BASE_URL)</string>
+	<key>movie_url</key>
+	<string>$(MOVIE_URL)</string>
+	<key>genre_url</key>
+	<string>$(GENRE_URL)</string>
 	<key>image_url</key>
 	<string>https://$(IMAGE_URL)</string>
 	<key>api_key</key>

@@ -50,7 +50,7 @@ class MainViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("PEFORM")
+        print(sender)
     }
     
     // MARK: - private methods
@@ -122,11 +122,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             return
         }
-        guard let cell: MovieCell = tableView.cellForRow(at: indexPath) as? MovieCell else {
-            return
-        }
         
-        self.performSegue(withIdentifier: "movieDetailSegue", sender: cell)
+        self.performSegue(withIdentifier: "movieDetailSegue", sender: indexPath.row)
     }
 }
 

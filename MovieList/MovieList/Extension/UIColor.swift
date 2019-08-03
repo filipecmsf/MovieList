@@ -10,7 +10,7 @@ import UIKit
 
 enum ColorName: String {
     case MovieListDarkGray = "DarkGray"
-    case MovieListDarkRed = "DarkRed"
+    case MovieListRed = "Red"
     case MovieListMediumGray = "MediumGray"
     case MovieListLightBeige = "LightBeige"
     case MovieListDarkBlue = "DarkBlue"

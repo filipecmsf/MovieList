@@ -9,6 +9,8 @@
 import Foundation
 
 class MainViewModel {
+    
+    // MARK: - properties
     var viewEntity: MainViewEntity? {
         didSet {
             reloadTableView?()
@@ -16,21 +18,35 @@ class MainViewModel {
     }
     
     var interactor: MainInteractor
-    
     var reloadTableView: (() -> Void)?
     
+    // MARK: - setup methods
     init() {
         interactor = MainInteractor()
         implementInteractor()
-        interactor.getMovies()
+        interactor.getGenres()
     }
     
+    // MARK: - private methods
     private func implementInteractor() {
         interactor.updateList = { [weak self] mainViewEntity in
             self?.viewEntity = mainViewEntity
         }
+        
+        interactor.genresLoaded = { [weak self] in
+            self?.interactor.getMovies()
+        }
     }
     
+    private func getMovie(index: Int) -> Movie? {
+        if let movie = viewEntity?.movieList[index] {
+            return movie
+        }
+        
+        return nil
+    }
+    
+    // MARK: - public methods
     func getListCount() -> Int {
         return viewEntity?.movieList.count ?? 0
     }
@@ -70,14 +86,6 @@ class MainViewModel {
     func getImagePath(index: Int) -> String? {
         if let movie = getMovie(index: index) {
             return movie.posterPath
-        }
-        
-        return nil
-    }
-    
-    private func getMovie(index: Int) -> Movie? {
-        if let movie = viewEntity?.movieList[index] {
-            return movie
         }
         
         return nil

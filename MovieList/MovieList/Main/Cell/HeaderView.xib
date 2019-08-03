@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="576" height="200"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headerBackground" translatesAutoresizingMaskIntoConstraints="NO" id="EhA-Ee-GLJ">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slashBackground" translatesAutoresizingMaskIntoConstraints="NO" id="EhA-Ee-GLJ">
                     <rect key="frame" x="0.0" y="0.0" width="576" height="200"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iFH-S4-rSO">
@@ -46,7 +46,7 @@
         </view>
     </objects>
     <resources>
-        <image name="headerBackground" width="521" height="601"/>
+        <image name="slashBackground" width="521" height="601"/>
         <namedColor name="DarkBlue">
             <color red="0.035294117647058823" green="0.043137254901960784" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

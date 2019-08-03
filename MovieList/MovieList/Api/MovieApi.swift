@@ -20,7 +20,7 @@ class MovieApi {
         return Static.instance
     }
     
-    func requestMovieList(request: Request, callback: @escaping (_ data: Data?, _ error: Error? )-> Void) {
+    func request(request: Request, callback: @escaping (_ data: Data?, _ error: Error? )-> Void) {
         
         Alamofire.request(request.endPoint,
                           method: request.method,
