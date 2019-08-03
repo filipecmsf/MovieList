@@ -22,7 +22,12 @@ class MainInteractor {
     
     func getMovies() {
         
-        let request = Request(endPoint: "https://api.themoviedb.org/3/movie/upcoming",
+        guard let url = Bundle.getValueFromInfo(key: .baseUrl) else {
+            // TODO: show error
+            return
+        }
+        
+        let request = Request(endPoint: url,
                               method: .get,
                               queryItems: ["api_key":"1f54bd990f1cdfb230adb312546d765d", "page": String(page)],
                               header: nil)

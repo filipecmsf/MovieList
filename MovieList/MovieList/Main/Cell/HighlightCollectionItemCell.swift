@@ -12,21 +12,29 @@ class HighlightCollectionItemCell: UICollectionViewCell {
     
     @IBOutlet private weak var backgroundImage: UIImageView! {
         didSet {
-            backgroundImage.backgroundColor = UIColor.lightGray
+            backgroundImage.backgroundColor = UIColor.clear
+            backgroundImage.contentMode = .scaleAspectFit
         }
     }
     
     @IBOutlet weak var titleLabel: UILabel! {
         didSet {
-            
+            titleLabel.textColor = UIColor.white
+            titleLabel.font = UIFont.createFont(font: .MovieListSourceSansProRegular, size: 15)
+            titleLabel.textAlignment = .center
+            titleLabel.numberOfLines = 1
         }
     }
     
     func setData(title: String, image: String) {
-        
         titleLabel.text = title
         
-        let urlString = String(format:"https://image.tmdb.org/t/p/w500%@", image)
+        guard let url = Bundle.getValueFromInfo(key: .imageUrl) else {
+            // TODO: show error
+            return
+        }
+        
+        let urlString = String(format:"%@%@",url, image)
         backgroundImage.af_setImage(withURL: URL(string: urlString)!)
     }
     

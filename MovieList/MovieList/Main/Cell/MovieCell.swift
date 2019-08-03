@@ -32,8 +32,12 @@ class MovieCell: UITableViewCell {
             return
         }
         
-        // FIXME: MOVE URL TO A BETTER PLACE
-        let urlString = String(format:"https://image.tmdb.org/t/p/w500%@", imagePath)
+        guard let url = Bundle.getValueFromInfo(key: .imageUrl) else {
+            // TODO: show error
+            return
+        }
+        
+        let urlString = String(format:"%@%@",url, imagePath)
         coverImage.af_setImage(withURL: URL(string: urlString)!)
     }
     

@@ -21,7 +21,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="576" height="200"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iFH-S4-rSO">
-                    <rect key="frame" x="25" y="169" width="42" height="21"/>
+                    <rect key="frame" x="20" y="169" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -33,7 +33,7 @@
                 <constraint firstItem="EhA-Ee-GLJ" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="M4o-KZ-X1e"/>
                 <constraint firstAttribute="bottom" secondItem="EhA-Ee-GLJ" secondAttribute="bottom" id="PFr-Av-lIw"/>
                 <constraint firstItem="EhA-Ee-GLJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="lae-31-Dtc"/>
-                <constraint firstItem="iFH-S4-rSO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="25" id="u8S-Ss-UQN"/>
+                <constraint firstItem="iFH-S4-rSO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="u8S-Ss-UQN"/>
                 <constraint firstAttribute="bottom" secondItem="iFH-S4-rSO" secondAttribute="bottom" constant="10" id="xGv-fq-Ktr"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

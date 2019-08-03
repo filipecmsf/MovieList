@@ -1,0 +1,16 @@
+//
+//  Release.xcconfig
+//  MovieList
+//
+//  Created by Filipe Faria on 03/08/19.
+//  Copyright © 2019 Filipe Faria. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "Pods/Target Support Files/Pods-MovieList/Pods-MovieList.debug.xcconfig"
+
+BASE_URL = api.themoviedb.org/3/movie/upcoming
+IMAGE_URL = image.tmdb.org/t/p/w500
+APP_NAME = MovieLovers
