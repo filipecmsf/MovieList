@@ -18,8 +18,6 @@ enum ColorName: String {
 
 extension UIColor {
     
-    
-    
     static func createColor(color: ColorName) -> UIColor {
         return UIColor(named: color.rawValue) ?? UIColor.black
     }

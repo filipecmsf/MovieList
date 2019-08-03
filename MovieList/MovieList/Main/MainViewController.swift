@@ -24,7 +24,8 @@ class MainViewController: UIViewController {
         }
     }
     
-    private var viewModel: MainViewModel?
+    private var viewModel: MainViewModel = MainViewModel()
+    
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -33,8 +34,14 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel = MainViewModel()
+        implementViewModel()
         
+    }
+    
+    func implementViewModel() {
+        viewModel.reloadTableView = {[weak self] in
+            self?.tableView.reloadData()
+        }
     }
 }
 
@@ -45,14 +52,17 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : 10
+        return section == 0 ? 1 : viewModel.getListCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0, let cell: HighlightCell = tableView.dequeueReusableCell(withIdentifier: "HighlightCell") as? HighlightCell {
+            cell.setData(list: viewModel.getHighlightList())
             return cell
         } else if let cell: MovieCell = tableView.dequeueReusableCell(withIdentifier: "MovieCell") as? MovieCell {
+            let row = indexPath.row
+            cell.setData(title: viewModel.getMovieName(index: row), release: viewModel.getMovieReleaseDate(index: row), image: viewModel.getImagePath(index: row))
             return cell
         }
         
@@ -60,7 +70,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 0 ? 300 : 120
+        return indexPath.section == 0 ? 200 : 120
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

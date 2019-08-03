@@ -22,4 +22,8 @@ class HighlightCollectionItemCell: UICollectionViewCell {
         }
     }
     
+    func setData(title: String) {
+        titleLabel.text = title
+    }
+    
 }

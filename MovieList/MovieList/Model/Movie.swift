@@ -15,6 +15,7 @@ struct Movie: Decodable {
     let popularity: Float
     let originalTitle: String
     let overview: String
+    let posterPath: String
     let releaseDate: String
     
     enum CodingKeys: String, CodingKey {
@@ -24,6 +25,7 @@ struct Movie: Decodable {
         case popularity = "popularity"
         case originalTitle = "original_title"
         case overview = "overview"
+        case posterPath = "poster_path"
         case releaseDate = "release_date"
     }
 }

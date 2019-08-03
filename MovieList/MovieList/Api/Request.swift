@@ -13,6 +13,6 @@ struct Request {
     let endPoint: String
     let method: HTTPMethod
     let queryItems: [String: String]
-    let paramenterEncoding: ParameterEncoding? = JSONEncoding.default
+    let paramenterEncoding: ParameterEncoding = URLEncoding.default
     let header: HTTPHeaders?
 }

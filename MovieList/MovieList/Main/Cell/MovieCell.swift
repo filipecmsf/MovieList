@@ -13,7 +13,7 @@ class MovieCell: UITableViewCell {
     @IBOutlet private weak var coverImage: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.font = UIFont.createFont(font: .MovieListSourceSansProBold, size: 25)
+            titleLabel.font = UIFont.createFont(font: .MovieListSourceSansProBold, size: 20)
             titleLabel.textColor = UIColor.createColor(color: .MovieListDarkGray)
         }
     }
@@ -22,6 +22,11 @@ class MovieCell: UITableViewCell {
             releaseDateLabel.font = UIFont.createFont(font: .MovieListSourceSansProRegular, size: 15)
             releaseDateLabel.textColor = UIColor.createColor(color: .MovieListMediumGray)
         }
+    }
+    
+    func setData(title: String, release: String, image: String?) {
+        titleLabel.text = title
+        releaseDateLabel.text = release
     }
     
 }
