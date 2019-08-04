@@ -45,14 +45,16 @@ class MovieCell: UITableViewCell {
         releaseDateLabel.text = movieViewEntity.releaseDate
         genresLabel.text = movieViewEntity.genreList.joined(separator: ", ")
         
-        guard let url = Bundle.getValueFromInfo(key: .imageUrl),
-            let posterPath = movieViewEntity.posterPath else {
-            // TODO: show error
+        
+        let placeholderImage = UIImage(named: "movie_placeholder")
+        guard let baseUrl = Bundle.getValueFromInfo(key: .imageUrl),
+            let posterPath = movieViewEntity.posterPath,
+            let url = URL(string: String(format:"%@%@",baseUrl, posterPath)) else {
+            posterImage.image = placeholderImage
             return
         }
         
-        let urlString = String(format:"%@%@",url, posterPath)
-        posterImage.af_setImage(withURL: URL(string: urlString)!)
+        posterImage.af_setImage(withURL: url, placeholderImage: placeholderImage, imageTransition: .crossDissolve(0.4), runImageTransitionIfCached: true)
     }
     
 }

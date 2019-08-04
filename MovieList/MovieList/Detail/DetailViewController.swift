@@ -11,81 +11,93 @@ import UIKit
 class DetailViewController: UIViewController {
     
     // MARK: - properties
-    @IBOutlet weak var posterBackgroundImage: UIImageView!
-    @IBOutlet weak var posterImage: UIImageView!
-    @IBOutlet weak var rateView: UIView! {
+    @IBOutlet private weak var posterBackgroundImage: UIImageView!
+    @IBOutlet private weak var posterImage: UIImageView!
+    @IBOutlet private weak var voteAverageView: UIView! {
         didSet {
-            rateView.layer.cornerRadius = rateView.frame.size.height / 2
-            rateView.backgroundColor = UIColor.createColor(color: .MovieListRed)
+            voteAverageView.layer.cornerRadius = voteAverageView.frame.size.height / 2
+            voteAverageView.backgroundColor = UIColor.createColor(color: .MovieListRed)
         }
     }
-    @IBOutlet weak var voteAverageTitleLabel: UILabel! {
+    @IBOutlet private weak var voteAverageTitleLabel: UILabel! {
         didSet {
             voteAverageTitleLabel.textAlignment = .center
             voteAverageTitleLabel.textColor = UIColor.white
             voteAverageTitleLabel.font = UIFont.createFont(font: .MovieListSourceSansProRegular, size: 15)
+            voteAverageTitleLabel.text = NSLocalizedString("detail.rate_title", comment: "")
+            
         }
     }
-    @IBOutlet weak var voteAverageLabel: UILabel! {
+    @IBOutlet private weak var voteAverageLabel: UILabel! {
         didSet {
             voteAverageLabel.textAlignment = .center
             voteAverageLabel.contentMode = .topLeft
             voteAverageLabel.textColor = UIColor.white
             voteAverageLabel.font = UIFont.createFont(font: .MovieListSourceSansProBold, size: 50)
+            voteAverageLabel.text = NSLocalizedString("empty_text", comment: "")
         }
     }
     
-    @IBOutlet weak var nameTitleLabel: UILabel! {
+    @IBOutlet private weak var nameTitleLabel: UILabel! {
         didSet {
-            nameTitleLabel.font = UIFont.createFont(font: .MovieListSourceSansProBold, size: 20)
+            nameTitleLabel.font = UIFont.createFont(font: .MovieListSourceSansProBold, size: 15)
             nameTitleLabel.textColor = UIColor.createColor(color: .MovieListDarkGray)
+            nameTitleLabel.text = NSLocalizedString("detail.title_title", comment: "")
         }
     }
-    @IBOutlet weak var titleLabel: UILabel! {
+    @IBOutlet private weak var nameLabel: UILabel! {
         didSet {
-            titleLabel.font = UIFont.createFont(font: .MovieListSourceSansProRegular, size: 20)
-            titleLabel.textColor = UIColor.createColor(color: .MovieListDarkGray)
-            titleLabel.numberOfLines = 0
+            nameLabel.font = UIFont.createFont(font: .MovieListSourceSansProRegular, size: 15)
+            nameLabel.textColor = UIColor.createColor(color: .MovieListDarkGray)
+            nameLabel.numberOfLines = 0
+            nameLabel.text = NSLocalizedString("empty_text", comment: "")
         }
     }
-    @IBOutlet weak var genreTitleLabel: UILabel! {
+    @IBOutlet private weak var genreTitleLabel: UILabel! {
         didSet {
             genreTitleLabel.contentMode = .top
-            genreTitleLabel.font = UIFont.createFont(font: .MovieListSourceSansProBold, size: 20)
+            genreTitleLabel.font = UIFont.createFont(font: .MovieListSourceSansProBold, size: 15)
             genreTitleLabel.textColor = UIColor.createColor(color: .MovieListDarkGray)
+            genreTitleLabel.text = NSLocalizedString("detail.genre_title", comment: "")
         }
     }
-    @IBOutlet weak var genreLabel: UILabel! {
+    @IBOutlet private weak var genreLabel: UILabel! {
         didSet {
-            genreLabel.font = UIFont.createFont(font: .MovieListSourceSansProRegular, size: 20)
+            genreLabel.font = UIFont.createFont(font: .MovieListSourceSansProRegular, size: 15)
             genreLabel.textColor = UIColor.createColor(color: .MovieListDarkGray)
             genreLabel.numberOfLines = 0
+            genreLabel.text = NSLocalizedString("empty_text", comment: "")
         }
     }
-    @IBOutlet weak var releaseTitleLabel: UILabel! {
+    @IBOutlet private weak var releaseTitleLabel: UILabel! {
         didSet {
-            releaseTitleLabel.font = UIFont.createFont(font: .MovieListSourceSansProBold, size: 20)
+            releaseTitleLabel.font = UIFont.createFont(font: .MovieListSourceSansProBold, size: 15)
             releaseTitleLabel.textColor = UIColor.createColor(color: .MovieListDarkGray)
+            releaseTitleLabel.text = NSLocalizedString("detail.release_date_title", comment: "")
+            releaseTitleLabel.numberOfLines = 2
         }
     }
-    @IBOutlet weak var releaseLabel: UILabel! {
+    @IBOutlet private weak var releaseLabel: UILabel! {
         didSet {
-            releaseLabel.font = UIFont.createFont(font: .MovieListSourceSansProRegular, size: 20)
+            releaseLabel.font = UIFont.createFont(font: .MovieListSourceSansProRegular, size: 15)
             releaseLabel.textColor = UIColor.createColor(color: .MovieListDarkGray)
             releaseLabel.numberOfLines = 0
+            releaseLabel.text = NSLocalizedString("empty_text", comment: "")
         }
     }
-    @IBOutlet weak var overviewTitleLabel: UILabel! {
+    @IBOutlet private weak var overviewTitleLabel: UILabel! {
         didSet {
             overviewTitleLabel.textColor = UIColor.createColor(color: .MovieListDarkGray)
-            overviewTitleLabel.font = UIFont.createFont(font: .MovieListSourceSansProBold, size: 20)
+            overviewTitleLabel.font = UIFont.createFont(font: .MovieListSourceSansProBold, size: 15)
+            overviewTitleLabel.text = NSLocalizedString("detail.overview_title", comment: "")
         }
     }
-    @IBOutlet weak var overviewLabel: UILabel! {
+    @IBOutlet private weak var overviewLabel: UILabel! {
         didSet {
-            overviewLabel.font = UIFont.createFont(font: .MovieListSourceSansProRegular, size: 20)
+            overviewLabel.font = UIFont.createFont(font: .MovieListSourceSansProRegular, size: 15)
             overviewLabel.textColor = UIColor.createColor(color: .MovieListDarkGray)
             overviewLabel.numberOfLines = 0
+            overviewLabel.text = NSLocalizedString("empty_text", comment: "")
         }
     }
     
@@ -117,32 +129,45 @@ class DetailViewController: UIViewController {
     
     private func setTitle() {
         title = viewModel?.getTitle()
-        titleLabel.text = viewModel?.getTitle()
-    }
-    
-    private func setOverview() {
-        overviewLabel.text = viewModel?.getOverview()
-    }
-    
-    private func setGenre() {
-        genreLabel.text = viewModel?.getGenders()
-    }
-    
-    private func setReleaseDate() {
-        releaseLabel.text = viewModel?.getReleaseDate()
+        nameLabel.text = viewModel?.getTitle()
     }
     
     private func setVoteAverage() {
-        voteAverageLabel.text = viewModel?.getVoteAverage()
+        if let text = viewModel?.getVoteAverage(), text != "0.0" {
+            voteAverageLabel.text = text
+        }
+    }
+    
+    private func setOverview() {
+        if let text = viewModel?.getOverview(), !text.isEmpty {
+            overviewLabel.text = text
+        }
+    }
+    
+    private func setGenre() {
+        if let text = viewModel?.getGenders(), !text.isEmpty {
+            genreLabel.text = text
+        }
+    }
+    
+    private func setReleaseDate() {
+        if let text = viewModel?.getReleaseDate(), !text.isEmpty {
+            releaseLabel.text = text
+        }
     }
     
     private func setPoster() {
+        
+        let placeholderImage = UIImage(named: "movie_placeholder")
+        
         guard let url = getPosterUrl() else {
+            posterBackgroundImage.image = placeholderImage
+            posterImage.image = placeholderImage
             return
         }
         
-        posterBackgroundImage.af_setImage(withURL: url)
-        posterImage.af_setImage(withURL: url)
+        posterBackgroundImage.af_setImage(withURL: url, placeholderImage: placeholderImage, imageTransition: .crossDissolve(0.4), runImageTransitionIfCached: true)
+        posterImage.af_setImage(withURL: url, placeholderImage: placeholderImage, imageTransition: .crossDissolve(0.4), runImageTransitionIfCached: true)
     }
     
     private func getPosterUrl() -> URL? {

@@ -11,15 +11,16 @@ import Foundation
 class MainViewModel {
     
     // MARK: - properties
-    var viewEntity: MainViewEntity? {
+    private var viewEntity: MainViewEntity? {
         didSet {
             reloadTableView?()
         }
     }
     
-    var interactor: MainInteractor
+    private var interactor: MainInteractor
+    private var loadingMovies: Bool = false
+    
     var reloadTableView: (() -> Void)?
-    var loadingMovies: Bool = false
     
     // MARK: - setup methods
     init() {

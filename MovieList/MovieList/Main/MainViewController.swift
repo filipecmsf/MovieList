@@ -29,7 +29,7 @@ class MainViewController: UIViewController {
     private let detailViewSegueIdentifier = "movieDetailSegue"
     private var viewModel: MainViewModel = MainViewModel()
     
-    @IBOutlet weak var backgroundView: UIView! {
+    @IBOutlet private weak var backgroundView: UIView! {
         didSet {
             backgroundView.backgroundColor = UIColor.createColor(color: .MovieListDarkBlue)
         }
@@ -44,6 +44,10 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         implementViewModel()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        navigationController?.navigationBar.barStyle = .black
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

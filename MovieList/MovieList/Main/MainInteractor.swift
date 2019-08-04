@@ -12,10 +12,12 @@ class MainInteractor {
     
     // MARK: - properties
     private var page: Int
+    private var totalPages: Int
     private var movieList: [Movie] = []
     private var movieViewEntityList: [MainMovieViewEntity] = []
     private var genreList: [Genre] = []
     private var highlightList: [Int] = []
+    private let highlightLimit = 10
     
     var updateList: ((MainViewEntity) -> Void)?
     var genresLoaded: (() -> Void)?
@@ -24,6 +26,7 @@ class MainInteractor {
     // MARK: - setup methods
     init() {
         page = 1
+        totalPages = 100
     }
     
     // MARK: - private methods
@@ -75,7 +78,7 @@ class MainInteractor {
             if !highlightList.contains(position) {
                 highlightList.append(position)
             }
-        } while highlightList.count < 5
+        } while highlightList.count < highlightLimit
         
         return highlightList.sorted(by: { $0 < $1 })
     }
@@ -92,6 +95,10 @@ class MainInteractor {
     }
     
     func getMovies() {
+        
+        if page >= totalPages {
+            return
+        }
         
         guard let baseUrl = Bundle.getValueFromInfo(key: .baseUrl),
             let movieUrl = Bundle.getValueFromInfo(key: .movieUrl),
@@ -111,6 +118,7 @@ class MainInteractor {
             if error == nil, let content = data {
                 do {
                     let movieListObj = try JSONDecoder().decode(MovieList.self, from: content)
+                    self.totalPages = movieListObj.totalPages
                     self.page += 1
                     self.updateMovieList(movieListObj: movieListObj)
                 } catch let error {

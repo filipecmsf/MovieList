@@ -32,14 +32,17 @@ class HighlightCollectionItemCell: UICollectionViewCell {
     func setData(mainMovieViewEntity: MainMovieViewEntity) {
         titleLabel.text = mainMovieViewEntity.title
         
-        guard let url = Bundle.getValueFromInfo(key: .imageUrl),
-        let posterPath = mainMovieViewEntity.posterPath else {
-            // TODO: show error
+        
+        let placeholderImage = UIImage(named: "movie_placeholder")
+        guard let baseUrl = Bundle.getValueFromInfo(key: .imageUrl),
+        let posterPath = mainMovieViewEntity.posterPath,
+        let url = URL(string: String(format:"%@%@",baseUrl, posterPath)) else {
+            backgroundImage.image = placeholderImage
             return
         }
         
-        let urlString = String(format:"%@%@",url, posterPath)
-        backgroundImage.af_setImage(withURL: URL(string: urlString)!)
+        
+        backgroundImage.af_setImage(withURL: url, placeholderImage: placeholderImage, imageTransition: .crossDissolve(0.4), runImageTransitionIfCached: true)
     }
     
 }

@@ -356,17 +356,17 @@
                     <connections>
                         <outlet property="genreLabel" destination="xt4-I8-sVv" id="LIM-Ov-tfJ"/>
                         <outlet property="genreTitleLabel" destination="dct-Dv-F4s" id="Fld-k1-TFw"/>
+                        <outlet property="nameLabel" destination="Rzn-fJ-6Z2" id="wJP-IN-TX6"/>
                         <outlet property="nameTitleLabel" destination="JXT-SA-Jvz" id="GYm-dI-AWw"/>
                         <outlet property="overviewLabel" destination="isy-gC-U82" id="MOl-Cz-Knc"/>
                         <outlet property="overviewTitleLabel" destination="Xh3-M7-12m" id="4Ts-Tg-uWv"/>
                         <outlet property="posterBackgroundImage" destination="TVK-gW-CNL" id="wLm-ki-6le"/>
                         <outlet property="posterImage" destination="5W9-M4-TKG" id="q7a-79-Hw0"/>
-                        <outlet property="rateView" destination="wcZ-f9-DfA" id="Rno-nt-8w1"/>
                         <outlet property="releaseLabel" destination="9fj-bl-rBC" id="j6W-Wj-EjL"/>
                         <outlet property="releaseTitleLabel" destination="PbC-ND-k5d" id="hcH-jl-sK9"/>
-                        <outlet property="titleLabel" destination="Rzn-fJ-6Z2" id="wJP-IN-TX6"/>
                         <outlet property="voteAverageLabel" destination="Dg4-jT-sBa" id="oUN-l9-jLo"/>
                         <outlet property="voteAverageTitleLabel" destination="Kqc-da-1q2" id="mfh-LR-Wa7"/>
+                        <outlet property="voteAverageView" destination="wcZ-f9-DfA" id="Rno-nt-8w1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r5a-tU-jis" userLabel="First Responder" sceneMemberID="firstResponder"/>

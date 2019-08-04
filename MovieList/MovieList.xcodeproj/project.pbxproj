@@ -39,6 +39,8 @@
 		85C12DB122F5FDAF007F8888 /* MainMovieViewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C12DB022F5FDAF007F8888 /* MainMovieViewEntity.swift */; };
 		85C12DB522F610A9007F8888 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C12DB422F610A9007F8888 /* DetailViewModel.swift */; };
 		85C12DB822F610DA007F8888 /* DetailViewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C12DB722F610DA007F8888 /* DetailViewEntity.swift */; };
+		85C12DBA22F68DD0007F8888 /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C12DB922F68DD0007F8888 /* ServerError.swift */; };
+		85C12DBC22F6FFAC007F8888 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85C12DBB22F6FFAC007F8888 /* Localizable.strings */; };
 		85D188F422F4E8C900E819D4 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D188F322F4E8C900E819D4 /* MainViewModel.swift */; };
 		85D188F622F4E8F100E819D4 /* MainViewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D188F522F4E8F100E819D4 /* MainViewEntity.swift */; };
 		85D188F822F4E9BA00E819D4 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D188F722F4E9BA00E819D4 /* MainInteractor.swift */; };
@@ -95,6 +97,8 @@
 		85C12DB022F5FDAF007F8888 /* MainMovieViewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMovieViewEntity.swift; sourceTree = "<group>"; };
 		85C12DB422F610A9007F8888 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailViewModel.swift; path = /Users/filipefaria/Documents/XCodeProject/ArcTouchTest/MovieList/MovieList/MovieList/MovieList/Detail/DetailViewModel.swift; sourceTree = "<absolute>"; };
 		85C12DB722F610DA007F8888 /* DetailViewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewEntity.swift; sourceTree = "<group>"; };
+		85C12DB922F68DD0007F8888 /* ServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
+		85C12DBB22F6FFAC007F8888 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		85D188F322F4E8C900E819D4 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		85D188F522F4E8F100E819D4 /* MainViewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewEntity.swift; sourceTree = "<group>"; };
 		85D188F722F4E9BA00E819D4 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
@@ -204,6 +208,7 @@
 				8564607222F39CD0008904BE /* Movie.swift */,
 				85C12DAD22F5FC29007F8888 /* GenreList.swift */,
 				85C12DAB22F5F7C7007F8888 /* Genre.swift */,
+				85C12DB922F68DD0007F8888 /* ServerError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -231,6 +236,7 @@
 				8564605F22F39907008904BE /* Assets.xcassets */,
 				85A24AFC22F3B056000418F2 /* Colors.xcassets */,
 				8564606122F39907008904BE /* LaunchScreen.storyboard */,
+				85C12DBB22F6FFAC007F8888 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -391,6 +397,7 @@
 				8564608222F3A3AE008904BE /* Lobster-Regular.ttf in Resources */,
 				8564608122F3A3AE008904BE /* SourceSansPro-Light.ttf in Resources */,
 				8564609422F3A962008904BE /* MovieCell.xib in Resources */,
+				85C12DBC22F6FFAC007F8888 /* Localizable.strings in Resources */,
 				85A24AFB22F3AF47000418F2 /* HighlightCell.xib in Resources */,
 				8564606022F39907008904BE /* Assets.xcassets in Resources */,
 				8564605E22F39906008904BE /* Main.storyboard in Resources */,
@@ -455,6 +462,7 @@
 			files = (
 				8564607122F39C70008904BE /* MovieList.swift in Sources */,
 				85C12DAA22F5D0D1007F8888 /* DetailViewController.swift in Sources */,
+				85C12DBA22F68DD0007F8888 /* ServerError.swift in Sources */,
 				85C12D8A22F5B348007F8888 /* Bundle.swift in Sources */,
 				85A24B0722F3D6B7000418F2 /* Request.swift in Sources */,
 				8564605B22F39906008904BE /* MainViewController.swift in Sources */,
