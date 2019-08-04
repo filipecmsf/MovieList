@@ -26,6 +26,17 @@ class MainViewController: UIViewController {
             tableView.register(UINib(nibName: "MovieCell", bundle: .main), forCellReuseIdentifier: "MovieCell")
         }
     }
+    
+    @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var loadingActivity: UIActivityIndicatorView!
+    
+    @IBOutlet weak var retryButton: UIButton! {
+        didSet {
+            retryButton.setStyle(title: NSLocalizedString("error.retry", comment: ""))
+            retryButton.isHidden = true
+        }
+    }
+    
     private let detailViewSegueIdentifier = "movieDetailSegue"
     private var viewModel: MainViewModel = MainViewModel()
     
@@ -61,8 +72,20 @@ class MainViewController: UIViewController {
     // MARK: - private methods
     private func implementViewModel() {
         viewModel.reloadTableView = {[weak self] in
+            self?.loadingView.isHidden = true
             self?.tableView.reloadData()
         }
+        
+        viewModel.showError = {[weak self] msg in
+            self?.loadingActivity.isHidden = true
+            self?.retryButton.isHidden = false
+            self?.showError(msg: msg)
+            
+        }
+    }
+    
+    @IBAction func retryTap() {
+        viewModel.retryLoadData()
     }
     
     private func updateBackgroundViewColor(cellIndex: Int) {
@@ -82,6 +105,13 @@ class MainViewController: UIViewController {
     
     private func loadMoreMovies() {
         viewModel.getMovies()
+    }
+    
+    private func showError(msg: String) {
+        let alert = UIAlertController(title: NSLocalizedString("alert.title", comment: ""), message: msg, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("alert.button", comment: ""), style: .default, handler: nil))
+        
+        self.present(alert, animated: true)
     }
 }
 

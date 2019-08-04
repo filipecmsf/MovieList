@@ -21,6 +21,7 @@ class MainViewModel {
     private var loadingMovies: Bool = false
     
     var reloadTableView: (() -> Void)?
+    var showError: ((String) -> Void)?
     
     // MARK: - setup methods
     init() {
@@ -39,9 +40,17 @@ class MainViewModel {
         interactor.genresLoaded = { [weak self] in
             self?.getMovies()
         }
+        
+        interactor.showError = {[weak self] errorMsg in
+            self?.showError?(errorMsg)
+        }
     }
     
     // MARK: - public methods
+    func retryLoadData() {
+        interactor.getGenres()
+    }
+    
     func getMovies() {
         if !loadingMovies {
             loadingMovies = true

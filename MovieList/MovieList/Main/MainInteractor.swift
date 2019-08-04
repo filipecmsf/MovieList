@@ -83,13 +83,47 @@ class MainInteractor {
         return highlightList.sorted(by: { $0 < $1 })
     }
     
-    // TODO: implement method return
-    private func createQueryItems() -> [String: String] {
-        return [:]
+    private func retry() {
+        page = 1
+        movieViewEntityList = []
+        movieList = []
+        highlightList = []
+        genreList = []
+        getGenres()
+    }
+    
+    private func createQueryItems(withPage: Bool) -> [String: String]? {
+        guard let apiKey = Bundle.getValueFromInfo(key: .apiKey) else {
+            return nil
+        }
+        
+        var queryItems: [String: String] = ["api_key": apiKey]
+        
+        if withPage {
+            queryItems["page"] = String(page)
+        }
+        
+        return queryItems
+    }
+    
+    private func handleError(error: ServerError?) {
+        guard let statusCode = error?.statusCode else {
+            self.showError?(NSLocalizedString("error.unknown_error", comment: ""))
+            return
+        }
+        
+        switch statusCode {
+        case .unprocessableEntity:
+            self.retry()
+        case .badRequest:
+            self.showError?(NSLocalizedString("error.no_internet", comment: ""))
+            
+        default:
+            self.showError?(NSLocalizedString("error.unknown_error", comment: ""))
+        }
     }
     
     // MARK: - public methods
-    
     func getMovieBy(id: Int) -> Movie? {
         return movieList.first(where: { $0.id == id })
     }
@@ -102,8 +136,8 @@ class MainInteractor {
         
         guard let baseUrl = Bundle.getValueFromInfo(key: .baseUrl),
             let movieUrl = Bundle.getValueFromInfo(key: .movieUrl),
-            let apiKey = Bundle.getValueFromInfo(key: .apiKey) else {
-                // TODO: show error
+            let queryItems = createQueryItems(withPage: true) else {
+                self.showError?(NSLocalizedString("error.unknown_error", comment: ""))
                 return
         }
         
@@ -111,7 +145,7 @@ class MainInteractor {
         
         let request = Request(endPoint: url,
                               method: .get,
-                              queryItems: ["api_key":apiKey, "page": String(page)],
+                              queryItems: queryItems,
                               header: nil)
         
         MovieApi().request(request: request) { (data, error) in
@@ -123,10 +157,11 @@ class MainInteractor {
                     self.updateMovieList(movieListObj: movieListObj)
                 } catch let error {
                     print(error)
-                    // TODO: show error
+                    self.showError?(NSLocalizedString("error.unknown_error", comment: ""))
                 }
             } else {
-                // TODO: show error
+                
+                self.handleError(error: error)
             }
         }
     }
@@ -135,8 +170,8 @@ class MainInteractor {
         
         guard let baseUrl = Bundle.getValueFromInfo(key: .baseUrl),
             let genreUrl = Bundle.getValueFromInfo(key: .genreUrl),
-            let apiKey = Bundle.getValueFromInfo(key: .apiKey) else {
-                // TODO: show error
+            let queryItems = createQueryItems(withPage: false) else {
+                self.showError?(NSLocalizedString("error.unknown_error", comment: ""))
                 return
         }
 
@@ -144,7 +179,7 @@ class MainInteractor {
 
         let request = Request(endPoint: url,
                               method: .get,
-                              queryItems: ["api_key":apiKey],
+                              queryItems: queryItems,
                               header: nil)
 
         MovieApi().request(request: request) { (data, error) in
@@ -154,10 +189,11 @@ class MainInteractor {
                     self.genreList = genreListObj.genres
                     self.genresLoaded?()
                 } catch let error {
-                    // TODO: show error
+                    print(error)
+                    self.showError?(NSLocalizedString("error.unknown_error", comment: ""))
                 }
             } else {
-                // TODO: show error
+                self.handleError(error: error)
             }
         }
     }

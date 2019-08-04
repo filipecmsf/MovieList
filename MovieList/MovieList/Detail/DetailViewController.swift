@@ -121,10 +121,6 @@ class DetailViewController: UIViewController {
         viewModel = DetailViewModel(detailViewEntity: detailViewEntity)
     }
     
-    // MARK: - public methods
-    
-    
-    
     // MARK: - private methods
     
     private func setTitle() {
@@ -173,7 +169,6 @@ class DetailViewController: UIViewController {
     private func getPosterUrl() -> URL? {
         guard let url = Bundle.getValueFromInfo(key: .imageUrl),
             let posterPath = viewModel?.getPosterPath() else {
-                // TODO: show error
                 return nil
         }
         

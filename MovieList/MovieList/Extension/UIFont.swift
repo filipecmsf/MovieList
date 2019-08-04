@@ -9,7 +9,6 @@
 import UIKit
 
 enum FontName: String {
-    case MovieListLobster = "Lobster-Regular"
     case MovieListSourceSansProRegular = "SourceSansPro-Regular"
     case MovieListSourceSansProLight = "SourceSansPro-Light"
     case MovieListSourceSansProBold = "SourceSansPro-Bold"

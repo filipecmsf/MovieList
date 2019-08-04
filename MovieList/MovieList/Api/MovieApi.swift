@@ -20,7 +20,24 @@ class MovieApi {
         return Static.instance
     }
     
-    func request(request: Request, callback: @escaping (_ data: Data?, _ error: Error? )-> Void) {
+    private func getServerError(error: Data?, statusCode: Int) -> ServerError {
+        
+        let unknownError = ServerError(statusMessage: nil, statusCode: ErrorStatusCode(rawValue: 400), errors: [NSLocalizedString("error.unknown_error", comment: "")])
+        
+        guard let data = error else {
+            return unknownError
+        }
+        
+        do {
+            var serverError = try JSONDecoder().decode(ServerError.self, from: data)
+            serverError.statusCode = ErrorStatusCode(rawValue: statusCode)
+            return serverError
+        } catch {
+            return unknownError
+        }
+    }
+    
+    func request(request: Request, callback: @escaping (_ data: Data?, _ error: ServerError? )-> Void) {
         
         Alamofire.request(request.endPoint,
                           method: request.method,
@@ -28,7 +45,18 @@ class MovieApi {
                           encoding: request.paramenterEncoding,
                           headers: request.header).responseJSON { response in
                             
-                            callback(response.data, response.error)
+                            guard let statusCode = response.response?.statusCode else {
+                                let error = ServerError(statusMessage: nil, statusCode: ErrorStatusCode(rawValue: 404), errors: [NSLocalizedString("error.no_internet", comment: "")])
+                                callback(response.data, error)
+                                return
+                            }
+                            switch statusCode {
+                            case 200...299:
+                                callback(response.data, nil)
+                            default:
+                                callback(nil, self.getServerError(error: response.data, statusCode: statusCode))
+                            }
+                            
         }
     }
 }

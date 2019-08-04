@@ -14,6 +14,7 @@ enum ColorName: String {
     case MovieListMediumGray = "MediumGray"
     case MovieListLightBeige = "LightBeige"
     case MovieListDarkBlue = "DarkBlue"
+    case MovieListLightGray = "LightGray"
 }
 
 extension UIColor {
