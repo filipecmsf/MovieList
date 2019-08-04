@@ -19,6 +19,7 @@ class MainViewModel {
     
     var interactor: MainInteractor
     var reloadTableView: (() -> Void)?
+    var loadingMovies: Bool = false
     
     // MARK: - setup methods
     init() {
@@ -31,14 +32,22 @@ class MainViewModel {
     private func implementInteractor() {
         interactor.updateList = { [weak self] mainViewEntity in
             self?.viewEntity = mainViewEntity
+            self?.loadingMovies = false
         }
         
         interactor.genresLoaded = { [weak self] in
-            self?.interactor.getMovies()
+            self?.getMovies()
         }
     }
     
     // MARK: - public methods
+    func getMovies() {
+        if !loadingMovies {
+            loadingMovies = true
+            interactor.getMovies()
+        }
+    }
+    
     func getMovieBy(index: Int) -> MainMovieViewEntity? {
         if let movie = viewEntity?.movieList[index] {
             return movie

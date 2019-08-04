@@ -75,6 +75,10 @@ class MainViewController: UIViewController {
             performSegue(withIdentifier: detailViewSegueIdentifier, sender: detailViewEntity)
         }
     }
+    
+    private func loadMoreMovies() {
+        viewModel.getMovies()
+    }
 }
 
 // MARK: - extensions
@@ -93,14 +97,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.section == 0, let cell = createHighlightCell() {
             return cell
-        } else if let cell: MovieCell = tableView.dequeueReusableCell(withIdentifier: "MovieCell") as? MovieCell {
+        } else {
             let row = indexPath.row
-            
+            checkHasMoreCells(row: row)
             updateBackgroundViewColor(cellIndex: row)
-            if let movie = viewModel.getMovieBy(index: row) {
-                cell.setData(movieViewEntity: movie)
+            if let cell = createMovieCell(row: row) {
                 return cell
             }
+            
         }
         
         return UITableViewCell()
@@ -149,7 +153,22 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         return nil
     }
     
+    private func createMovieCell(row: Int) -> MovieCell? {
+        
+        if let cell: MovieCell = tableView.dequeueReusableCell(withIdentifier: "MovieCell") as? MovieCell,
+            let movie = viewModel.getMovieBy(index: row) {
+            
+            cell.setData(movieViewEntity: movie)
+            return cell
+        }
+        return nil
+    }
     
+    private func checkHasMoreCells(row: Int) {
+        if row == viewModel.getListCount() - 1 {
+            loadMoreMovies()
+        }
+    }
     
 }
 

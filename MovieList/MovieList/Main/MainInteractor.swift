@@ -114,6 +114,7 @@ class MainInteractor {
                     self.page += 1
                     self.updateMovieList(movieListObj: movieListObj)
                 } catch let error {
+                    print(error)
                     // TODO: show error
                 }
             } else {

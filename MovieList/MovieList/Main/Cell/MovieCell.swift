@@ -45,12 +45,13 @@ class MovieCell: UITableViewCell {
         releaseDateLabel.text = movieViewEntity.releaseDate
         genresLabel.text = movieViewEntity.genreList.joined(separator: ", ")
         
-        guard let url = Bundle.getValueFromInfo(key: .imageUrl) else {
+        guard let url = Bundle.getValueFromInfo(key: .imageUrl),
+            let posterPath = movieViewEntity.posterPath else {
             // TODO: show error
             return
         }
         
-        let urlString = String(format:"%@%@",url, movieViewEntity.posterPath)
+        let urlString = String(format:"%@%@",url, posterPath)
         posterImage.af_setImage(withURL: URL(string: urlString)!)
     }
     

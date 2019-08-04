@@ -14,7 +14,7 @@ class DetailViewModel {
         self.detailViewEntity = detailViewEntity
     }
     
-    func getPosterPath() -> String {
+    func getPosterPath() -> String? {
         return detailViewEntity.posterPath
     }
     
