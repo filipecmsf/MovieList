@@ -29,13 +29,14 @@ class MainRepository: MainRepositoryProtocol {
             return nil
         }
         
-        var queryItems: [String: String] = ["api_key": apiKey]
-        
-        if withPage {
-            queryItems["page"] = String(page)
-        }
+        let queryItems: [String: String] = ["api_key": apiKey]
         
         return queryItems
+    }
+    
+    private func addMovieListItems(queryItems: inout [String: String]) {
+        queryItems["page"] = String(page)
+        queryItems["region"] = Locale.current.regionCode
     }
     
     private func handleError(error: ServerError?) -> String {
@@ -95,10 +96,12 @@ class MainRepository: MainRepositoryProtocol {
         
         guard let baseUrl = Bundle.getValueFromInfo(key: .baseUrl),
             let movieUrl = Bundle.getValueFromInfo(key: .movieUrl),
-            let queryItems = createQueryItems(withPage: true) else {
+            var queryItems = createQueryItems(withPage: true) else {
                 callback( nil, NSLocalizedString("error.unknown_error", comment: ""), false)
                 return
         }
+        
+        addMovieListItems(queryItems: &queryItems)
         
         let url = "\(baseUrl)\(movieUrl)"
         

@@ -51,7 +51,7 @@
                     </stackView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bYz-jW-xqt">
                         <rect key="frame" x="5" y="138.5" width="574" height="1"/>
-                        <color key="backgroundColor" name="MediumGray"/>
+                        <color key="backgroundColor" name="LightGray"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="mBr-8S-hdY"/>
                         </constraints>
@@ -80,8 +80,8 @@
     </objects>
     <resources>
         <image name="movie_placeholder" width="500" height="750"/>
-        <namedColor name="MediumGray">
-            <color red="0.32156862745098042" green="0.31372549019607843" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="LightGray">
+            <color red="0.81699997186660767" green="0.81699997186660767" blue="0.81699997186660767" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
