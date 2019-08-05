@@ -15,4 +15,3 @@ struct DetailViewEntity {
     let overview: String
     let voteAverage: Float
 }
-

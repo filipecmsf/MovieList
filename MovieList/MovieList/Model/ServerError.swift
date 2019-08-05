@@ -10,7 +10,7 @@ import Foundation
 
 enum ErrorStatusCode: Int, Decodable {
     case badRequest = 400
-    case NotFound = 404
+    case notFound = 404
     case unprocessableEntity = 422
     case internalServerError = 500
 }

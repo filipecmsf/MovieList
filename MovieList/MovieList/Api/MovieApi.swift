@@ -6,16 +6,16 @@
 //  Copyright © 2019 Filipe Faria. All rights reserved.
 //
 
-import Foundation
 import Alamofire
 import AlamofireImage
+import Foundation
 
 class MovieApi {
     
-    class var shared : MovieApi {
+    class var shared: MovieApi {
         
         struct Static {
-            static let instance: MovieApi = MovieApi()
+            static let instance = MovieApi()
         }
         return Static.instance
     }
@@ -37,7 +37,7 @@ class MovieApi {
         }
     }
     
-    func request(request: Request, callback: @escaping (_ data: Data?, _ error: ServerError? )-> Void) {
+    func request(request: Request, callback: @escaping (_ data: Data?, _ error: ServerError? ) -> Void) {
         
         Alamofire.request(request.endPoint,
                           method: request.method,

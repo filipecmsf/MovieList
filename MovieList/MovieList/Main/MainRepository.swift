@@ -72,7 +72,7 @@ class MainRepository: MainRepositoryProtocol {
                               queryItems: queryItems,
                               header: nil)
         
-        MovieApi.shared.request(request: request) { (data, error) in
+        MovieApi.shared.request(request: request) { data, error in
             if error == nil, let content = data {
                 do {
                     let genreListObj = try JSONDecoder().decode(GenreList.self, from: content)
@@ -107,7 +107,7 @@ class MainRepository: MainRepositoryProtocol {
                               queryItems: queryItems,
                               header: nil)
         
-        MovieApi.shared.request(request: request) { (data, error) in
+        MovieApi.shared.request(request: request) { data, error in
             if error == nil, let content = data {
                 do {
                     let movieListObj = try JSONDecoder().decode(MovieList.self, from: content)

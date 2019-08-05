@@ -22,3 +22,6 @@ It's used on:
 * DetailViewController.swift
 * HighlightCollectionItemCell
 
+### SwiftLint
+
+It's used in all files from the project, except for files from pod. It has been added to keep the project clean from code smell.

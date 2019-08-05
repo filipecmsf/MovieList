@@ -12,8 +12,8 @@ class HeaderView: UIView {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.font = UIFont.createFont(font: .MovieListSourceSansProBold, size: 30)
-            titleLabel.textColor = UIColor.createColor(color: .MovieListDarkGray)
+            titleLabel.font = UIFont.createFont(font: .movieListSourceSansProBold, size: 30)
+            titleLabel.textColor = UIColor.createColor(color: .movieListDarkGray)
             titleLabel.text = ""
         }
     }

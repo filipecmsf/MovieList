@@ -6,10 +6,8 @@
 //  Copyright © 2019 Filipe Faria. All rights reserved.
 //
 
-
-
-import UIKit
 import Alamofire
+import UIKit
 
 class MainViewController: UIViewController {
     
@@ -27,10 +25,10 @@ class MainViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var loadingView: UIView!
-    @IBOutlet weak var loadingActivity: UIActivityIndicatorView!
+    @IBOutlet private weak var loadingView: UIView!
+    @IBOutlet private weak var loadingActivity: UIActivityIndicatorView!
     
-    @IBOutlet weak var retryButton: UIButton! {
+    @IBOutlet private weak var retryButton: UIButton! {
         didSet {
             retryButton.setStyle(title: NSLocalizedString("error.retry", comment: ""))
             retryButton.isHidden = true
@@ -42,7 +40,7 @@ class MainViewController: UIViewController {
     
     @IBOutlet private weak var backgroundView: UIView! {
         didSet {
-            backgroundView.backgroundColor = UIColor.createColor(color: .MovieListDarkBlue)
+            backgroundView.backgroundColor = UIColor.createColor(color: .movieListDarkBlue)
         }
     }
     
@@ -83,13 +81,13 @@ class MainViewController: UIViewController {
         }
     }
     
-    @IBAction func retryTap() {
+    @IBAction private func retryTap() {
         viewModel.retryLoadData()
     }
     
     private func updateBackgroundViewColor(cellIndex: Int) {
         if cellIndex == 0 {
-            backgroundView.backgroundColor = UIColor.createColor(color: .MovieListDarkBlue)
+            backgroundView.backgroundColor = UIColor.createColor(color: .movieListDarkBlue)
         } else if cellIndex == viewModel.getListCount() - 1 {
             backgroundView.backgroundColor = UIColor.white
         }
@@ -208,4 +206,3 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
-

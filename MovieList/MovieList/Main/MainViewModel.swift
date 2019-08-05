@@ -69,7 +69,7 @@ class MainViewModel {
     
     func getDetailViewEntity(id: Int) -> DetailViewEntity? {
         guard let movie = interactor.getMovieBy(id: id),
-        let genderList = viewEntity?.movieList.first(where: {$0.id == id})?.genreList else {
+        let genderList = (viewEntity?.movieList.first { $0.id == id })?.genreList else {
             return nil
         }
         

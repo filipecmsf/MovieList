@@ -21,21 +21,21 @@ class MovieCell: UITableViewCell {
     }
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.font = UIFont.createFont(font: .MovieListSourceSansProBold, size: 20)
-            titleLabel.textColor = UIColor.createColor(color: .MovieListDarkGray)
+            titleLabel.font = UIFont.createFont(font: .movieListSourceSansProBold, size: 20)
+            titleLabel.textColor = UIColor.createColor(color: .movieListDarkGray)
         }
     }
     @IBOutlet private weak var releaseDateLabel: UILabel! {
         didSet {
-            releaseDateLabel.font = UIFont.createFont(font: .MovieListSourceSansProRegular, size: 15)
-            releaseDateLabel.textColor = UIColor.createColor(color: .MovieListMediumGray)
+            releaseDateLabel.font = UIFont.createFont(font: .movieListSourceSansProRegular, size: 15)
+            releaseDateLabel.textColor = UIColor.createColor(color: .movieListMediumGray)
         }
     }
     
-    @IBOutlet weak var genresLabel: UILabel! {
+    @IBOutlet private weak var genresLabel: UILabel! {
         didSet {
-            genresLabel.font = UIFont.createFont(font: .MovieListSourceSansProRegular, size: 15)
-            genresLabel.textColor = UIColor.createColor(color: .MovieListDarkGray)
+            genresLabel.font = UIFont.createFont(font: .movieListSourceSansProRegular, size: 15)
+            genresLabel.textColor = UIColor.createColor(color: .movieListDarkGray)
             genresLabel.numberOfLines = 2
         }
     }
@@ -45,11 +45,10 @@ class MovieCell: UITableViewCell {
         releaseDateLabel.text = movieViewEntity.releaseDate
         genresLabel.text = movieViewEntity.genreList.joined(separator: ", ")
         
-        
         let placeholderImage = UIImage(named: "movie_placeholder")
         guard let baseUrl = Bundle.getValueFromInfo(key: .imageUrl),
             let posterPath = movieViewEntity.posterPath,
-            let url = URL(string: String(format:"%@%@",baseUrl, posterPath)) else {
+            let url = URL(string: String(format: "%@%@", baseUrl, posterPath)) else {
             posterImage.image = placeholderImage
             return
         }

@@ -9,9 +9,9 @@
 import UIKit
 
 enum FontName: String {
-    case MovieListSourceSansProRegular = "SourceSansPro-Regular"
-    case MovieListSourceSansProLight = "SourceSansPro-Light"
-    case MovieListSourceSansProBold = "SourceSansPro-Bold"
+    case movieListSourceSansProRegular = "SourceSansPro-Regular"
+    case movieListSourceSansProLight = "SourceSansPro-Light"
+    case movieListSourceSansProBold = "SourceSansPro-Bold"
 }
 
 extension UIFont {

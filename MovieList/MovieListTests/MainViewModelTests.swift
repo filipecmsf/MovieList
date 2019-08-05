@@ -6,8 +6,8 @@
 //  Copyright © 2019 Filipe Faria. All rights reserved.
 //
 
-import XCTest
 @testable import MovieList
+import XCTest
 
 class MainViewModelTests: XCTestCase {
 
@@ -16,6 +16,7 @@ class MainViewModelTests: XCTestCase {
     var repositoryMock: MainRepositoryMock!
     
     override func setUp() {
+        super.setUp()
         repositoryMock = MainRepositoryMock()
         interactor = MainInteractor(repository: repositoryMock)
     }

@@ -59,7 +59,7 @@ class MainInteractor {
         
         for id in genres {
             
-            guard let genre = genreList.first(where: {$0.id == id}) else {
+            guard let genre = genreList.first(where: { $0.id == id }) else {
                 break
             }
             
@@ -79,7 +79,7 @@ class MainInteractor {
             }
         } while highlightList.count < highlightLimit
         
-        return highlightList.sorted(by: { $0 < $1 })
+        return highlightList.sorted { $0 < $1 }
     }
     
     private func showError(msg: String) {
@@ -105,11 +105,11 @@ class MainInteractor {
     
     // MARK: - public methods
     func getMovieBy(id: Int) -> Movie? {
-        return movieList.first(where: { $0.id == id })
+        return movieList.first { $0.id == id }
     }
     
     func getMovies() {
-        mainRepository.getMovies { (moviesList, error, clearData) in
+        mainRepository.getMovies { moviesList, error, clearData in
             if clearData {
                 self.clearData()
                 return
@@ -122,7 +122,7 @@ class MainInteractor {
     }
     
     func getGenres() {
-        mainRepository.getGenres { (genresList, error) in
+        mainRepository.getGenres { genresList, error in
             if let msg = error, !msg.isEmpty {
                 self.showError(msg: msg)
             } else if let genres = genresList {

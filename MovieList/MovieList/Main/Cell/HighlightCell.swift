@@ -13,11 +13,11 @@ class HighlightCell: UITableViewCell {
     var selectedMovieId: ((Int) -> Void)?
     private var hightlightMovieList: [MainMovieViewEntity] = []
     
-    @IBOutlet weak var highlightCollectionView: UICollectionView! {
+    @IBOutlet private weak var highlightCollectionView: UICollectionView! {
         didSet {
             highlightCollectionView.delegate = self
             highlightCollectionView.dataSource = self
-            highlightCollectionView.backgroundColor = UIColor.createColor(color: .MovieListDarkBlue)
+            highlightCollectionView.backgroundColor = UIColor.createColor(color: .movieListDarkBlue)
             
             highlightCollectionView.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
             highlightCollectionView.register(UINib(nibName: "HighlightCollectionItemCell", bundle: .main), forCellWithReuseIdentifier: "HighlightCollectionItemCell")

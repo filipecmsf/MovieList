@@ -9,12 +9,12 @@
 import UIKit
 
 enum ColorName: String {
-    case MovieListDarkGray = "DarkGray"
-    case MovieListRed = "Red"
-    case MovieListMediumGray = "MediumGray"
-    case MovieListLightBeige = "LightBeige"
-    case MovieListDarkBlue = "DarkBlue"
-    case MovieListLightGray = "LightGray"
+    case movieListDarkGray = "DarkGray"
+    case movieListRed = "Red"
+    case movieListMediumGray = "MediumGray"
+    case movieListLightBeige = "LightBeige"
+    case movieListDarkBlue = "DarkBlue"
+    case movieListLightGray = "LightGray"
 }
 
 extension UIColor {

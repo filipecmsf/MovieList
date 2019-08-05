@@ -12,9 +12,9 @@ extension UIButton {
     func setStyle(title: String) {
         setTitle(title, for: .normal)
         setTitleColor(UIColor.white, for: .normal)
-        titleLabel?.font = UIFont.createFont(font: .MovieListSourceSansProRegular, size: 20)
-        backgroundColor = UIColor.createColor(color: .MovieListMediumGray)
-        layer.borderColor = UIColor.createColor(color: .MovieListLightGray).cgColor
+        titleLabel?.font = UIFont.createFont(font: .movieListSourceSansProRegular, size: 20)
+        backgroundColor = UIColor.createColor(color: .movieListMediumGray)
+        layer.borderColor = UIColor.createColor(color: .movieListLightGray).cgColor
         layer.borderWidth = 1
         layer.cornerRadius = 10
     }

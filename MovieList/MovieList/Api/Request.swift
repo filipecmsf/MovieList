@@ -6,8 +6,8 @@
 //  Copyright © 2019 Filipe Faria. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 struct Request {
     let endPoint: String

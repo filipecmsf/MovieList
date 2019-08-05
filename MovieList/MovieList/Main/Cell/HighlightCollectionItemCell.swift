@@ -14,16 +14,16 @@ class HighlightCollectionItemCell: UICollectionViewCell {
         didSet {
             backgroundImage.backgroundColor = UIColor.clear
             backgroundImage.contentMode = .scaleAspectFit
-            backgroundImage.layer.borderColor = UIColor.createColor(color: .MovieListLightBeige).cgColor
+            backgroundImage.layer.borderColor = UIColor.createColor(color: .movieListLightBeige).cgColor
             backgroundImage.layer.borderWidth = 2
             backgroundImage.layer.cornerRadius = 5
         }
     }
     
-    @IBOutlet weak var titleLabel: UILabel! {
+    @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
             titleLabel.textColor = UIColor.white
-            titleLabel.font = UIFont.createFont(font: .MovieListSourceSansProRegular, size: 15)
+            titleLabel.font = UIFont.createFont(font: .movieListSourceSansProRegular, size: 15)
             titleLabel.textAlignment = .center
             titleLabel.numberOfLines = 1
         }
@@ -32,15 +32,13 @@ class HighlightCollectionItemCell: UICollectionViewCell {
     func setData(mainMovieViewEntity: MainMovieViewEntity) {
         titleLabel.text = mainMovieViewEntity.title
         
-        
         let placeholderImage = UIImage(named: "movie_placeholder")
         guard let baseUrl = Bundle.getValueFromInfo(key: .imageUrl),
         let posterPath = mainMovieViewEntity.posterPath,
-        let url = URL(string: String(format:"%@%@",baseUrl, posterPath)) else {
+        let url = URL(string: String(format: "%@%@", baseUrl, posterPath)) else {
             backgroundImage.image = placeholderImage
             return
         }
-        
         
         backgroundImage.af_setImage(withURL: url, placeholderImage: placeholderImage, imageTransition: .crossDissolve(0.4), runImageTransitionIfCached: true)
     }

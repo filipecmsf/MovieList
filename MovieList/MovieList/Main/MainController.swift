@@ -6,8 +6,8 @@
 //  Copyright © 2019 Filipe Faria. All rights reserved.
 //
 
-import UIKit
 import Alamofire
+import UIKit
 
 class MainViewController: UIViewController {
     
@@ -80,4 +80,3 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         return 80
     }
 }
-
