@@ -6,7 +6,7 @@ Application to see upcoming movies on US and it's details. Powered by [TheMovieD
 
 It's necessary to install and run cocoapods.
 
-## Libraries used
+## Libraries
 
 ### Alamofire
 
