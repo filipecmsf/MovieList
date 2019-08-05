@@ -14,6 +14,7 @@ class HeaderView: UIView {
         didSet {
             titleLabel.font = UIFont.createFont(font: .MovieListSourceSansProBold, size: 30)
             titleLabel.textColor = UIColor.createColor(color: .MovieListDarkGray)
+            titleLabel.text = ""
         }
     }
     @IBOutlet private weak var backgroundImage: UIImageView!
@@ -21,5 +22,9 @@ class HeaderView: UIView {
     func setStyleWithoutBackground() {
         backgroundImage.isHidden = true
         titleLabel.textColor = UIColor.white
+    }
+    
+    func setTitle(title: String) {
+        titleLabel.text = title
     }
 }

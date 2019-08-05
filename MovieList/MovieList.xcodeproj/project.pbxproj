@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8512380A22F7276D00AE7DB3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8512380922F7276D00AE7DB3 /* String.swift */; };
+		8512380C22F79F4B00AE7DB3 /* MainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8512380B22F79F4B00AE7DB3 /* MainRepository.swift */; };
 		8564605922F39906008904BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8564605822F39906008904BE /* AppDelegate.swift */; };
 		8564605B22F39906008904BE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8564605A22F39906008904BE /* MainViewController.swift */; };
 		8564605E22F39906008904BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8564605C22F39906008904BE /* Main.storyboard */; };
@@ -60,6 +62,8 @@
 /* Begin PBXFileReference section */
 		1C3231C71D0F3A68288A8ACC /* Pods_MovieList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4151B0D7F631F9895853F7AB /* Pods-MovieList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieList.release.xcconfig"; path = "Target Support Files/Pods-MovieList/Pods-MovieList.release.xcconfig"; sourceTree = "<group>"; };
+		8512380922F7276D00AE7DB3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		8512380B22F79F4B00AE7DB3 /* MainRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRepository.swift; sourceTree = "<group>"; };
 		8564605522F39906008904BE /* MovieList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8564605822F39906008904BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8564605A22F39906008904BE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 				8564605A22F39906008904BE /* MainViewController.swift */,
 				85D188F322F4E8C900E819D4 /* MainViewModel.swift */,
 				85D188F722F4E9BA00E819D4 /* MainInteractor.swift */,
+				8512380B22F79F4B00AE7DB3 /* MainRepository.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -267,6 +272,7 @@
 				85A24AFE22F3C40D000418F2 /* UIColor.swift */,
 				85C12D8922F5B348007F8888 /* Bundle.swift */,
 				85C12DBD22F71F15007F8888 /* UIButton.swift */,
+				8512380922F7276D00AE7DB3 /* String.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -465,6 +471,7 @@
 				85C12D8A22F5B348007F8888 /* Bundle.swift in Sources */,
 				85A24B0722F3D6B7000418F2 /* Request.swift in Sources */,
 				8564605B22F39906008904BE /* MainViewController.swift in Sources */,
+				8512380C22F79F4B00AE7DB3 /* MainRepository.swift in Sources */,
 				8564607822F3A22C008904BE /* MovieCell.swift in Sources */,
 				8564609722F3AB45008904BE /* UIFont.swift in Sources */,
 				85D188F422F4E8C900E819D4 /* MainViewModel.swift in Sources */,
@@ -476,6 +483,7 @@
 				85C12DAC22F5F7C7007F8888 /* Genre.swift in Sources */,
 				85A24AFF22F3C40D000418F2 /* UIColor.swift in Sources */,
 				85D188F822F4E9BA00E819D4 /* MainInteractor.swift in Sources */,
+				8512380A22F7276D00AE7DB3 /* String.swift in Sources */,
 				85A24B0522F3D396000418F2 /* MovieApi.swift in Sources */,
 				85A24B0322F3C757000418F2 /* HeaderView.swift in Sources */,
 				85A24AF922F3AF09000418F2 /* HighlightCell.swift in Sources */,

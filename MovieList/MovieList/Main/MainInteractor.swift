@@ -11,8 +11,6 @@ import Foundation
 class MainInteractor {
     
     // MARK: - properties
-    private var page: Int
-    private var totalPages: Int
     private var movieList: [Movie] = []
     private var movieViewEntityList: [MainMovieViewEntity] = []
     private var genreList: [Genre] = []
@@ -23,10 +21,12 @@ class MainInteractor {
     var genresLoaded: (() -> Void)?
     var showError: ((String) -> Void)?
     
+    var mainRepository: MainRepository
+    
     // MARK: - setup methods
-    init() {
-        page = 1
-        totalPages = 100
+    init(repository: MainRepository) {
+        mainRepository = repository
+        mainRepository.delegate = self
     }
     
     // MARK: - private methods
@@ -47,7 +47,7 @@ class MainInteractor {
         for movie in movieList {
             let genres = getGenresNames(genres: movie.genreIds)
             
-            let mainMovieViewEntity = MainMovieViewEntity(id: movie.id, title: movie.title, releaseDate: movie.releaseDate, posterPath: movie.posterPath, genreList: genres)
+            let mainMovieViewEntity = MainMovieViewEntity(id: movie.id, title: movie.title, releaseDate: movie.releaseDate.formatDate(), posterPath: movie.posterPath, genreList: genres)
             
             mainMovieViewEntityList.append(mainMovieViewEntity)
         }
@@ -83,118 +83,38 @@ class MainInteractor {
         return highlightList.sorted(by: { $0 < $1 })
     }
     
-    private func retry() {
-        page = 1
-        movieViewEntityList = []
-        movieList = []
-        highlightList = []
-        genreList = []
-        getGenres()
-    }
-    
-    private func createQueryItems(withPage: Bool) -> [String: String]? {
-        guard let apiKey = Bundle.getValueFromInfo(key: .apiKey) else {
-            return nil
-        }
-        
-        var queryItems: [String: String] = ["api_key": apiKey]
-        
-        if withPage {
-            queryItems["page"] = String(page)
-        }
-        
-        return queryItems
-    }
-    
-    private func handleError(error: ServerError?) {
-        guard let statusCode = error?.statusCode else {
-            self.showError?(NSLocalizedString("error.unknown_error", comment: ""))
-            return
-        }
-        
-        switch statusCode {
-        case .unprocessableEntity:
-            self.retry()
-        case .badRequest:
-            self.showError?(NSLocalizedString("error.no_internet", comment: ""))
-            
-        default:
-            self.showError?(NSLocalizedString("error.unknown_error", comment: ""))
-        }
-    }
-    
     // MARK: - public methods
     func getMovieBy(id: Int) -> Movie? {
         return movieList.first(where: { $0.id == id })
     }
     
     func getMovies() {
-        
-        if page >= totalPages {
-            return
-        }
-        
-        guard let baseUrl = Bundle.getValueFromInfo(key: .baseUrl),
-            let movieUrl = Bundle.getValueFromInfo(key: .movieUrl),
-            let queryItems = createQueryItems(withPage: true) else {
-                self.showError?(NSLocalizedString("error.unknown_error", comment: ""))
-                return
-        }
-        
-        let url = "\(baseUrl)\(movieUrl)"
-        
-        let request = Request(endPoint: url,
-                              method: .get,
-                              queryItems: queryItems,
-                              header: nil)
-        
-        MovieApi().request(request: request) { (data, error) in
-            if error == nil, let content = data {
-                do {
-                    let movieListObj = try JSONDecoder().decode(MovieList.self, from: content)
-                    self.totalPages = movieListObj.totalPages
-                    self.page += 1
-                    self.updateMovieList(movieListObj: movieListObj)
-                } catch let error {
-                    print(error)
-                    self.showError?(NSLocalizedString("error.unknown_error", comment: ""))
-                }
-            } else {
-                
-                self.handleError(error: error)
-            }
-        }
+        mainRepository.getMovies()
     }
     
     func getGenres() {
-        
-        guard let baseUrl = Bundle.getValueFromInfo(key: .baseUrl),
-            let genreUrl = Bundle.getValueFromInfo(key: .genreUrl),
-            let queryItems = createQueryItems(withPage: false) else {
-                self.showError?(NSLocalizedString("error.unknown_error", comment: ""))
-                return
-        }
+        mainRepository.getGenres()
+    }
+}
 
-        let url = "\(baseUrl)\(genreUrl)"
-
-        let request = Request(endPoint: url,
-                              method: .get,
-                              queryItems: queryItems,
-                              header: nil)
-
-        MovieApi().request(request: request) { (data, error) in
-            if error == nil, let content = data {
-                do {
-                    let genreListObj = try JSONDecoder().decode(GenreList.self, from: content)
-                    self.genreList = genreListObj.genres
-                    self.genresLoaded?()
-                } catch let error {
-                    print(error)
-                    self.showError?(NSLocalizedString("error.unknown_error", comment: ""))
-                }
-            } else {
-                self.handleError(error: error)
-            }
-        }
+extension MainInteractor: MainRepositoryResponse {
+    func showError(msg: String) {
+        self.showError?(msg)
+    }
+    
+    func genders(genders: GenreList) {
+        self.genreList = genders.genres
+        self.genresLoaded?()
+    }
+    
+    func movies(movies: MovieList) {
+        self.updateMovieList(movieListObj: movies)
+    }
+    
+    func clearData() {
+        movieViewEntityList = []
+        movieList = []
+        highlightList = []
+        genreList = []
     }
 }

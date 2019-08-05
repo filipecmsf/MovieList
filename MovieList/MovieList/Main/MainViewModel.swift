@@ -11,7 +11,7 @@ import Foundation
 class MainViewModel {
     
     // MARK: - properties
-    private var viewEntity: MainViewEntity? {
+    internal var viewEntity: MainViewEntity? {
         didSet {
             reloadTableView?()
         }
@@ -24,10 +24,10 @@ class MainViewModel {
     var showError: ((String) -> Void)?
     
     // MARK: - setup methods
-    init() {
-        interactor = MainInteractor()
+    init(interactor: MainInteractor = MainInteractor(repository: MainRepository())) {
+        self.interactor = interactor
         implementInteractor()
-        interactor.getGenres()
+        self.interactor.getGenres()
     }
     
     // MARK: - private methods
@@ -43,6 +43,7 @@ class MainViewModel {
         
         interactor.showError = {[weak self] errorMsg in
             self?.showError?(errorMsg)
+            self?.loadingMovies = false
         }
     }
     

@@ -37,22 +37,6 @@ class DetailViewController: UIViewController {
             voteAverageLabel.text = NSLocalizedString("empty_text", comment: "")
         }
     }
-    
-    @IBOutlet private weak var nameTitleLabel: UILabel! {
-        didSet {
-            nameTitleLabel.font = UIFont.createFont(font: .MovieListSourceSansProBold, size: 15)
-            nameTitleLabel.textColor = UIColor.createColor(color: .MovieListDarkGray)
-            nameTitleLabel.text = NSLocalizedString("detail.title_title", comment: "")
-        }
-    }
-    @IBOutlet private weak var nameLabel: UILabel! {
-        didSet {
-            nameLabel.font = UIFont.createFont(font: .MovieListSourceSansProRegular, size: 15)
-            nameLabel.textColor = UIColor.createColor(color: .MovieListDarkGray)
-            nameLabel.numberOfLines = 0
-            nameLabel.text = NSLocalizedString("empty_text", comment: "")
-        }
-    }
     @IBOutlet private weak var genreTitleLabel: UILabel! {
         didSet {
             genreTitleLabel.contentMode = .top
@@ -125,7 +109,6 @@ class DetailViewController: UIViewController {
     
     private func setTitle() {
         title = viewModel?.getTitle()
-        nameLabel.text = viewModel?.getTitle()
     }
     
     private func setVoteAverage() {

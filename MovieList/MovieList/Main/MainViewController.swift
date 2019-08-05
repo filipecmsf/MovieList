@@ -38,7 +38,7 @@ class MainViewController: UIViewController {
     }
     
     private let detailViewSegueIdentifier = "movieDetailSegue"
-    private var viewModel: MainViewModel = MainViewModel()
+    private var viewModel = MainViewModel(interactor: MainInteractor(repository: MainRepository()))
     
     @IBOutlet private weak var backgroundView: UIView! {
         didSet {
@@ -47,6 +47,7 @@ class MainViewController: UIViewController {
     }
     
     // MARK: - setup methods
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -145,7 +146,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 0 ? 200 : 120
+        return indexPath.section == 0 ? 200 : 140
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -154,6 +155,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             if section == 0 {
                 headerView.setStyleWithoutBackground()
             }
+            
+            let title = section == 0 ? NSLocalizedString("main.highlight_title", comment: "") : NSLocalizedString("main.movies_title", comment: "")
+            headerView.setTitle(title: title)
+            
             return headerView
         }
         
