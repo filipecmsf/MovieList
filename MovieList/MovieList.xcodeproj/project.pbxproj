@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8512380A22F7276D00AE7DB3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8512380922F7276D00AE7DB3 /* String.swift */; };
 		8512380C22F79F4B00AE7DB3 /* MainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8512380B22F79F4B00AE7DB3 /* MainRepository.swift */; };
+		8512380E22F7ADA800AE7DB3 /* MainRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8512380D22F7ADA800AE7DB3 /* MainRepositoryMock.swift */; };
+		8512381022F7BF8700AE7DB3 /* DetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8512380F22F7BF8700AE7DB3 /* DetailViewModelTests.swift */; };
 		8564605922F39906008904BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8564605822F39906008904BE /* AppDelegate.swift */; };
 		8564605B22F39906008904BE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8564605A22F39906008904BE /* MainViewController.swift */; };
 		8564605E22F39906008904BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8564605C22F39906008904BE /* Main.storyboard */; };
@@ -22,7 +24,7 @@
 		8564608022F3A3AE008904BE /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8564607C22F3A3AD008904BE /* SourceSansPro-Bold.ttf */; };
 		8564608122F3A3AE008904BE /* SourceSansPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8564607D22F3A3AD008904BE /* SourceSansPro-Light.ttf */; };
 		8564608322F3A3AE008904BE /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8564607F22F3A3AD008904BE /* SourceSansPro-Regular.ttf */; };
-		8564608C22F3A7B6008904BE /* MovieListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8564608B22F3A7B6008904BE /* MovieListTests.swift */; };
+		8564608C22F3A7B6008904BE /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8564608B22F3A7B6008904BE /* MainViewModelTests.swift */; };
 		8564609422F3A962008904BE /* MovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8564609322F3A962008904BE /* MovieCell.xib */; };
 		8564609722F3AB45008904BE /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8564609622F3AB45008904BE /* UIFont.swift */; };
 		85A24AF922F3AF09000418F2 /* HighlightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A24AF822F3AF09000418F2 /* HighlightCell.swift */; };
@@ -64,6 +66,8 @@
 		4151B0D7F631F9895853F7AB /* Pods-MovieList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieList.release.xcconfig"; path = "Target Support Files/Pods-MovieList/Pods-MovieList.release.xcconfig"; sourceTree = "<group>"; };
 		8512380922F7276D00AE7DB3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		8512380B22F79F4B00AE7DB3 /* MainRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRepository.swift; sourceTree = "<group>"; };
+		8512380D22F7ADA800AE7DB3 /* MainRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRepositoryMock.swift; sourceTree = "<group>"; };
+		8512380F22F7BF8700AE7DB3 /* DetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModelTests.swift; sourceTree = "<group>"; };
 		8564605522F39906008904BE /* MovieList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8564605822F39906008904BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8564605A22F39906008904BE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -80,7 +84,7 @@
 		8564607D22F3A3AD008904BE /* SourceSansPro-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Light.ttf"; sourceTree = "<group>"; };
 		8564607F22F3A3AD008904BE /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		8564608922F3A7B5008904BE /* MovieListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8564608B22F3A7B6008904BE /* MovieListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListTests.swift; sourceTree = "<group>"; };
+		8564608B22F3A7B6008904BE /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		8564608D22F3A7B6008904BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8564609322F3A962008904BE /* MovieCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCell.xib; sourceTree = "<group>"; };
 		8564609622F3AB45008904BE /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
@@ -259,7 +263,9 @@
 		8564608A22F3A7B6008904BE /* MovieListTests */ = {
 			isa = PBXGroup;
 			children = (
-				8564608B22F3A7B6008904BE /* MovieListTests.swift */,
+				8512380F22F7BF8700AE7DB3 /* DetailViewModelTests.swift */,
+				8564608B22F3A7B6008904BE /* MainViewModelTests.swift */,
+				8512380D22F7ADA800AE7DB3 /* MainRepositoryMock.swift */,
 				8564608D22F3A7B6008904BE /* Info.plist */,
 			);
 			path = MovieListTests;
@@ -498,7 +504,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8564608C22F3A7B6008904BE /* MovieListTests.swift in Sources */,
+				8512380E22F7ADA800AE7DB3 /* MainRepositoryMock.swift in Sources */,
+				8564608C22F3A7B6008904BE /* MainViewModelTests.swift in Sources */,
+				8512381022F7BF8700AE7DB3 /* DetailViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -654,7 +662,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P2KT7G76VC;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MovieList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -673,7 +681,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P2KT7G76VC;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MovieList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

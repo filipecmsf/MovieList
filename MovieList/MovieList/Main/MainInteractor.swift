@@ -21,12 +21,11 @@ class MainInteractor {
     var genresLoaded: (() -> Void)?
     var showError: ((String) -> Void)?
     
-    var mainRepository: MainRepository
+    var mainRepository: MainRepositoryProtocol
     
     // MARK: - setup methods
-    init(repository: MainRepository) {
+    init(repository: MainRepositoryProtocol) {
         mainRepository = repository
-        mainRepository.delegate = self
     }
     
     // MARK: - private methods
@@ -83,38 +82,52 @@ class MainInteractor {
         return highlightList.sorted(by: { $0 < $1 })
     }
     
+    private func showError(msg: String) {
+        self.showError?(msg)
+    }
+    
+    private func genders(genders: GenreList) {
+        self.genreList = genders.genres
+        self.genresLoaded?()
+    }
+    
+    private func movies(movies: MovieList) {
+        self.updateMovieList(movieListObj: movies)
+    }
+    
+    private func clearData() {
+        movieViewEntityList = []
+        movieList = []
+        highlightList = []
+        genreList = []
+        getGenres()
+    }
+    
     // MARK: - public methods
     func getMovieBy(id: Int) -> Movie? {
         return movieList.first(where: { $0.id == id })
     }
     
     func getMovies() {
-        mainRepository.getMovies()
+        mainRepository.getMovies { (moviesList, error, clearData) in
+            if clearData {
+                self.clearData()
+                return
+            } else if let msg = error, !msg.isEmpty {
+                self.showError(msg: msg)
+            } else if let movies = moviesList {
+                self.movies(movies: movies)
+            }
+        }
     }
     
     func getGenres() {
-        mainRepository.getGenres()
-    }
-}
-
-extension MainInteractor: MainRepositoryResponse {
-    func showError(msg: String) {
-        self.showError?(msg)
-    }
-    
-    func genders(genders: GenreList) {
-        self.genreList = genders.genres
-        self.genresLoaded?()
-    }
-    
-    func movies(movies: MovieList) {
-        self.updateMovieList(movieListObj: movies)
-    }
-    
-    func clearData() {
-        movieViewEntityList = []
-        movieList = []
-        highlightList = []
-        genreList = []
+        mainRepository.getGenres { (genresList, error) in
+            if let msg = error, !msg.isEmpty {
+                self.showError(msg: msg)
+            } else if let genres = genresList {
+                self.genders(genders: genres)
+            }
+        }
     }
 }

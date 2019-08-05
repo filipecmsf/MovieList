@@ -9,22 +9,14 @@
 import Foundation
 
 protocol MainRepositoryProtocol {
-    func getGenres()
-    func getMovies()
-}
-
-protocol MainRepositoryResponse {
-    func showError(msg: String)
-    func genders(genders: GenreList)
-    func movies(movies: MovieList)
-    func clearData()
+    func getGenres(callback: @escaping (_ genres: GenreList?, _ error: String?) -> Void)
+    func getMovies(callback: @escaping (_ movies: MovieList?, _ error: String?, _ clearData: Bool) -> Void)
 }
 
 class MainRepository: MainRepositoryProtocol {
     
     private var page: Int
     private var totalPages: Int
-    var delegate: MainRepositoryResponse?
     
     // MARK: - setup methods
     init() {
@@ -46,34 +38,30 @@ class MainRepository: MainRepositoryProtocol {
         return queryItems
     }
     
-    private func handleError(error: ServerError?) {
+    private func handleError(error: ServerError?) -> String {
         guard let statusCode = error?.statusCode else {
-            self.delegate?.showError(msg: NSLocalizedString("error.unknown_error", comment: ""))
-            return
+            return NSLocalizedString("error.unknown_error", comment: "")
         }
         
         switch statusCode {
-        case .unprocessableEntity:
-            self.retry()
         case .badRequest:
-            self.delegate?.showError(msg: NSLocalizedString("error.no_internet", comment: ""))
-            
+            return NSLocalizedString("error.no_internet", comment: "")   
         default:
-            self.delegate?.showError(msg: NSLocalizedString("error.unknown_error", comment: ""))
+            return NSLocalizedString("error.unknown_error", comment: "")
         }
     }
     
     private func retry() {
         page = 1
-        getGenres()
+//        getGenres()
     }
     
-    func getGenres() {
+    func getGenres(callback: @escaping (_ genres: GenreList?, _ error: String?) -> Void) {
         
         guard let baseUrl = Bundle.getValueFromInfo(key: .baseUrl),
             let genreUrl = Bundle.getValueFromInfo(key: .genreUrl),
             let queryItems = createQueryItems(withPage: false) else {
-                self.delegate?.showError(msg: NSLocalizedString("error.unknown_error", comment: ""))
+                callback(nil, NSLocalizedString("error.unknown_error", comment: ""))
                 return
         }
         
@@ -88,18 +76,18 @@ class MainRepository: MainRepositoryProtocol {
             if error == nil, let content = data {
                 do {
                     let genreListObj = try JSONDecoder().decode(GenreList.self, from: content)
-                    self.delegate?.genders(genders: genreListObj)
+                    callback( genreListObj, nil)
                 } catch let error {
                     print(error)
-                    self.delegate?.showError(msg: NSLocalizedString("error.unknown_error", comment: ""))
+                    callback(nil, NSLocalizedString("error.unknown_error", comment: ""))
                 }
             } else {
-                self.handleError(error: error)
+                callback(nil, self.handleError(error: error))
             }
         }
     }
     
-    func getMovies() {
+    func getMovies(callback: @escaping (_ movies: MovieList?, _ error: String?, _ clearData: Bool) -> Void) {
         
         if page >= totalPages {
             return
@@ -108,7 +96,7 @@ class MainRepository: MainRepositoryProtocol {
         guard let baseUrl = Bundle.getValueFromInfo(key: .baseUrl),
             let movieUrl = Bundle.getValueFromInfo(key: .movieUrl),
             let queryItems = createQueryItems(withPage: true) else {
-                self.delegate?.showError(msg: NSLocalizedString("error.unknown_error", comment: ""))
+                callback( nil, NSLocalizedString("error.unknown_error", comment: ""), false)
                 return
         }
         
@@ -125,14 +113,19 @@ class MainRepository: MainRepositoryProtocol {
                     let movieListObj = try JSONDecoder().decode(MovieList.self, from: content)
                     self.totalPages = movieListObj.totalPages
                     self.page += 1
-                    self.delegate?.movies(movies: movieListObj)
+                    callback(movieListObj, nil, false)
                 } catch let error {
                     print(error)
-                    self.delegate?.showError(msg: NSLocalizedString("error.unknown_error", comment: ""))
+                    callback(nil, NSLocalizedString("error.unknown_error", comment: ""), false)
                 }
             } else {
                 
-                self.handleError(error: error)
+                if error?.statusCode == ErrorStatusCode.unprocessableEntity {
+                    callback(nil, nil, true)
+                    return
+                }
+                
+                callback(nil, self.handleError(error: error), false)
             }
         }
     }
