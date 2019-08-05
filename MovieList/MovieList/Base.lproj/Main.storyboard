@@ -297,7 +297,7 @@
                                                         <rect key="frame" x="0.0" y="520" width="320" height="81"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3vs-9D-28r">
-                                                                <rect key="frame" x="20" y="0.0" width="270" height="81"/>
+                                                                <rect key="frame" x="20" y="0.0" width="270" height="71"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xh3-M7-12m">
                                                                         <rect key="frame" x="0.0" y="0.0" width="270" height="30"/>
@@ -309,7 +309,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isy-gC-U82">
-                                                                        <rect key="frame" x="0.0" y="30" width="270" height="51"/>
+                                                                        <rect key="frame" x="0.0" y="30" width="270" height="41"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -319,7 +319,7 @@
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="bottom" secondItem="3vs-9D-28r" secondAttribute="bottom" id="JoK-LS-jwn"/>
+                                                            <constraint firstAttribute="bottom" secondItem="3vs-9D-28r" secondAttribute="bottom" constant="10" id="JoK-LS-jwn"/>
                                                             <constraint firstItem="3vs-9D-28r" firstAttribute="leading" secondItem="9ff-hy-Sj1" secondAttribute="leading" constant="20" id="RJW-pw-CUa"/>
                                                             <constraint firstAttribute="trailing" secondItem="3vs-9D-28r" secondAttribute="trailing" constant="30" id="boV-eq-xOz"/>
                                                             <constraint firstItem="3vs-9D-28r" firstAttribute="top" secondItem="9ff-hy-Sj1" secondAttribute="top" id="mcl-g1-5B1"/>

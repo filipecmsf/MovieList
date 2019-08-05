@@ -55,11 +55,9 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        implementViewModel()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
+        navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.barStyle = .black
+        implementViewModel()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
