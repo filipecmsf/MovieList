@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  MovieList
+
+  Created by Filipe Faria on 04/08/19.
+  Copyright © 2019 Filipe Faria. All rights reserved.
+*/
+
+"empty_text" = "--";
+
+"main.highlight_title" = "Highlights";
+"main.movies_title" = "Movies";
+
+"detail.release_date_title" = "Release date";
+"detail.overview_title" = "Overview";
+"detail.genre_title" = "Genres";
+"detail.title_title" = "Title";
+"detail.rate_title" = "Rate";
+
+"error.no_internet" = "Please, check your connection and try again";
+"error.unknown_error" = "There was an unexpected error, please try again";
+"error.retry" = "Try again";
+
+"alert.title" = "Ops";
+"alert.button" = "Ok";
+
+"search.search_placeholder" = "Movie name";
