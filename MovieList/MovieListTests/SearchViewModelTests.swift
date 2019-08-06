@@ -1,28 +1,28 @@
 //
-//  MainViewModelTests.swift
+//  SearchViewModelTests.swift
 //  MovieListTests
 //
-//  Created by Filipe Faria on 01/08/19.
+//  Created by Filipe Faria on 06/08/19.
 //  Copyright © 2019 Filipe Faria. All rights reserved.
 //
 
 @testable import MovieList
 import XCTest
 
-class MainViewModelTests: XCTestCase {
-
-    var viewModel: MainViewModel!
-    var interactor: MainInteractor!
-    var repositoryMock: NextMovieRepositoryMock!
+class SearchViewModelTests: XCTestCase {
     
+    var viewModel: SearchViewModel!
+    var interactor: SearchInteractor!
+    var repositoryMock: NextMovieRepositoryMock!
+
     override func setUp() {
         super.setUp()
         repositoryMock = NextMovieRepositoryMock()
-        interactor = MainInteractor(repository: repositoryMock)
+        interactor = SearchInteractor(repository: repositoryMock)
     }
-
+    
     func testGetMoviesWithSuccess() {
-        viewModel = MainViewModel(interactor: interactor)
+        viewModel = SearchViewModel(interactor: interactor)
         
         let exp = expectation(description: "viewEntity not to be nil")
         
@@ -31,7 +31,7 @@ class MainViewModelTests: XCTestCase {
             exp.fulfill()
         }
         
-        viewModel.getMovies()
+        viewModel.getMovies(text: "the lion king")
         
         waitForExpectations(timeout: 10) { error in
             if let error = error {
@@ -41,9 +41,10 @@ class MainViewModelTests: XCTestCase {
     }
     
     func testGetMoviesWithError() {
-        repositoryMock.showMovieError = true
+        repositoryMock.showSearchError = true
         repositoryMock.showGenreError = false
-        viewModel = MainViewModel(interactor: interactor)
+        viewModel = SearchViewModel(interactor: interactor)
+        viewModel.getMovies(text: "the lion king")
         
         let exp = expectation(description: "show error after movies service retorn error")
         
@@ -52,7 +53,7 @@ class MainViewModelTests: XCTestCase {
             exp.fulfill()
         }
         
-        viewModel.getMovies()
+        viewModel.getMovies(text: "the lion king")
         
         waitForExpectations(timeout: 10) { error in
             if let error = error {
@@ -64,7 +65,7 @@ class MainViewModelTests: XCTestCase {
     func testGetGenresWithError() {
         repositoryMock.showMovieError = false
         repositoryMock.showGenreError = true
-        viewModel = MainViewModel(interactor: interactor)
+        viewModel = SearchViewModel(interactor: interactor)
         
         let exp = expectation(description: "show error after genres service return error")
         
@@ -73,7 +74,7 @@ class MainViewModelTests: XCTestCase {
             exp.fulfill()
         }
         
-        viewModel.retryLoadData()
+        viewModel.getMovies(text: "the lion king")
         
         waitForExpectations(timeout: 10) { error in
             if let error = error {
@@ -85,7 +86,8 @@ class MainViewModelTests: XCTestCase {
     func testGetMovieByIndexWithSuccess() {
         repositoryMock.showMovieError = false
         repositoryMock.showGenreError = false
-        viewModel = MainViewModel(interactor: interactor)
+        viewModel = SearchViewModel(interactor: interactor)
+        viewModel.getMovies(text: "the lion king")
         
         let movie = viewModel.getMovieBy(index: 0)
         
@@ -96,7 +98,7 @@ class MainViewModelTests: XCTestCase {
     func testGetMovieByIndexWithError() {
         repositoryMock.showMovieError = false
         repositoryMock.showGenreError = true
-        viewModel = MainViewModel(interactor: interactor)
+        viewModel = SearchViewModel(interactor: interactor)
         
         let movie = viewModel.getMovieBy(index: 0)
         
@@ -106,7 +108,8 @@ class MainViewModelTests: XCTestCase {
     func testGetDetailViewEntityWithSuccess() {
         repositoryMock.showMovieError = false
         repositoryMock.showGenreError = false
-        viewModel = MainViewModel(interactor: interactor)
+        viewModel = SearchViewModel(interactor: interactor)
+        viewModel.getMovies(text: "the lion king")
         
         let detailViewEntity = viewModel.getDetailViewEntity(id: 3)
         XCTAssertNotNil(detailViewEntity)
@@ -116,7 +119,7 @@ class MainViewModelTests: XCTestCase {
     func testGetDetailViewEntityWithError() {
         repositoryMock.showMovieError = false
         repositoryMock.showGenreError = false
-        viewModel = MainViewModel(interactor: interactor)
+        viewModel = SearchViewModel(interactor: interactor)
         
         let detailViewEntity = viewModel.getDetailViewEntity(id: 11)
         XCTAssertNil(detailViewEntity)
@@ -125,26 +128,9 @@ class MainViewModelTests: XCTestCase {
     func testGetMovieCount() {
         repositoryMock.showMovieError = false
         repositoryMock.showGenreError = false
-        viewModel = MainViewModel(interactor: interactor)
+        viewModel = SearchViewModel(interactor: interactor)
+        viewModel.getMovies(text: "the lion king")
         
-        XCTAssertEqual(viewModel.getListCount(), 10)
-    }
-    
-    func testGetHighLightMovieListWithSuccess() {
-        repositoryMock.showMovieError = false
-        repositoryMock.showGenreError = false
-        viewModel = MainViewModel(interactor: interactor)
-        
-        let movies = viewModel.getHighlightList()
-        XCTAssertEqual(movies.count, 10)
-    }
-    
-    func testGetHighLightMovieListWithServerError() {
-        repositoryMock.showMovieError = true
-        repositoryMock.showGenreError = false
-        viewModel = MainViewModel(interactor: interactor)
-        
-        let movies = viewModel.getHighlightList()
-        XCTAssertEqual(movies.count, 0)
+        XCTAssertEqual(viewModel.getListCount(), 4)
     }
 }

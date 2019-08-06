@@ -10,23 +10,24 @@ import UIKit
 
 class SearchViewController: UITableViewController {
     
-    var viewModel: SeachViewModel?
-    var timer: Timer?
+    // MARK: - properties
+    var viewModel: SearchViewModel?
+    private var timer: Timer?
     private let searchMovieDetailViewSegueIdentifier = "searchMovieDetailSegue"
+    private let timeDelay = 2.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "MovieCell", bundle: .main), forCellReuseIdentifier: "MovieCell")
+        
+        viewModel = SearchViewModel(interactor: SearchInteractor(repository: NextMovieRepository()))
         implementViewModel()
     }
     
-    func setGenres(genres: [Genre]) {
-        viewModel = SeachViewModel(interactor: SearchInteractor(repository: MainRepository()))
-    }
-    
-    @objc func searchMovies(text: String) {
+    @objc
+    func searchMovies(text: String) {
         viewModel?.getMovies(text: text)
     }
     
@@ -68,7 +69,7 @@ class SearchViewController: UITableViewController {
         viewModel?.getMoreMovies()
     }
     
-    // MARK: - TABLEVIEW METHODS
+    // MARK: - tableView methods
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -84,7 +85,6 @@ class SearchViewController: UITableViewController {
         if let cell = createMovieCell(row: row) {
             return cell
         }
-        
         
         return UITableViewCell()
     }
@@ -115,7 +115,7 @@ class SearchViewController: UITableViewController {
         }
     }
     
-    // MARK: - AUXILIAR METHODS
+    // MARK: - auxiliar methods
     private func createMovieCell(row: Int) -> MovieCell? {
         
         if let cell: MovieCell = tableView.dequeueReusableCell(withIdentifier: "MovieCell") as? MovieCell,
@@ -142,7 +142,7 @@ extension SearchViewController: UISearchBarDelegate {
             timer = nil
         }
         
-        timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) {timer in
+        timer = Timer.scheduledTimer(withTimeInterval: timeDelay, repeats: false) {timer in
             if timer.isValid {
                 self.searchMovies(text: searchText)
             }

@@ -1,5 +1,5 @@
 //
-//  MovieRepository.swift
+//  NextMovieRepository.swift
 //  MovieList
 //
 //  Created by Filipe Faria on 04/08/19.
@@ -8,13 +8,14 @@
 
 import Foundation
 
-protocol MainRepositoryProtocol {
+protocol NextMovieRepositoryProtocol {
     func getGenres(callback: @escaping (_ genres: GenreList?, _ error: String?) -> Void)
     func getMovies(callback: @escaping (_ movies: MovieList?, _ error: String?, _ clearData: Bool) -> Void)
     func getSearchMovies(text: String, callback: @escaping (_ movies: MovieList?, _ error: String?, _ clearData: Bool) -> Void)
+    func resetSearchData()
 }
 
-class MainRepository: MainRepositoryProtocol {
+class NextMovieRepository: NextMovieRepositoryProtocol {
     
     private var page: Int
     private var totalPages: Int
@@ -25,6 +26,7 @@ class MainRepository: MainRepositoryProtocol {
         totalPages = 100
     }
     
+    // MARK: - private methods
     private func createQueryItems() -> [String: String]? {
         guard let apiKey = Bundle.getValueFromInfo(key: .apiKey) else {
             return nil
@@ -58,6 +60,48 @@ class MainRepository: MainRepositoryProtocol {
         }
     }
     
+    private func createGenderRequest() -> Request? {
+        guard let baseUrl = Bundle.getValueFromInfo(key: .baseUrl),
+            let genreUrl = Bundle.getValueFromInfo(key: .genreUrl),
+            let queryItems = createQueryItems() else {
+                
+                return nil
+        }
+        
+        let url = "\(baseUrl)\(genreUrl)"
+        
+        return Request(endPoint: url, method: .get, queryItems: queryItems, header: nil)
+    }
+    
+    private func createMovieRequest() -> Request? {
+        guard let baseUrl = Bundle.getValueFromInfo(key: .baseUrl),
+            let movieUrl = Bundle.getValueFromInfo(key: .movieUrl),
+            var queryItems = createQueryItems() else {
+                return nil
+        }
+        
+        addMovieListItems(queryItems: &queryItems)
+        
+        let url = "\(baseUrl)\(movieUrl)"
+        
+        return Request(endPoint: url, method: .get, queryItems: queryItems, header: nil)
+    }
+    
+    private func createRequestSearch(text: String) -> Request? {
+        guard let baseUrl = Bundle.getValueFromInfo(key: .baseUrl),
+            let searchUrl = Bundle.getValueFromInfo(key: .searchUrl),
+            var queryItems = createQueryItems() else {
+                return nil
+        }
+        
+        addSearchMovieListItems(text: text, queryItems: &queryItems)
+        
+        let url = "\(baseUrl)\(searchUrl)"
+        
+        return Request(endPoint: url, method: .get, queryItems: queryItems, header: nil)
+    }
+    
+    // MARK: - public methods
     func resetSearchData() {
         page = 1
         totalPages = 100
@@ -65,19 +109,10 @@ class MainRepository: MainRepositoryProtocol {
     
     func getGenres(callback: @escaping (_ genres: GenreList?, _ error: String?) -> Void) {
         
-        guard let baseUrl = Bundle.getValueFromInfo(key: .baseUrl),
-            let genreUrl = Bundle.getValueFromInfo(key: .genreUrl),
-            let queryItems = createQueryItems() else {
-                callback(nil, NSLocalizedString("error.unknown_error", comment: ""))
-                return
+        guard let request = createGenderRequest() else {
+            callback(nil, NSLocalizedString("error.unknown_error", comment: ""))
+            return
         }
-        
-        let url = "\(baseUrl)\(genreUrl)"
-        
-        let request = Request(endPoint: url,
-                              method: .get,
-                              queryItems: queryItems,
-                              header: nil)
         
         MovieApi.shared.request(request: request) { data, error in
             if error == nil, let content = data {
@@ -100,21 +135,10 @@ class MainRepository: MainRepositoryProtocol {
             return
         }
         
-        guard let baseUrl = Bundle.getValueFromInfo(key: .baseUrl),
-            let movieUrl = Bundle.getValueFromInfo(key: .movieUrl),
-            var queryItems = createQueryItems() else {
-                callback( nil, NSLocalizedString("error.unknown_error", comment: ""), false)
-                return
+        guard let request = createMovieRequest() else {
+            callback( nil, NSLocalizedString("error.unknown_error", comment: ""), false)
+            return
         }
-        
-        addMovieListItems(queryItems: &queryItems)
-        
-        let url = "\(baseUrl)\(movieUrl)"
-        
-        let request = Request(endPoint: url,
-                              method: .get,
-                              queryItems: queryItems,
-                              header: nil)
         
         MovieApi.shared.request(request: request) { data, error in
             if error == nil, let content = data {
@@ -144,21 +168,10 @@ class MainRepository: MainRepositoryProtocol {
             return
         }
         
-        guard let baseUrl = Bundle.getValueFromInfo(key: .baseUrl),
-            let searchUrl = Bundle.getValueFromInfo(key: .searchUrl),
-            var queryItems = createQueryItems() else {
-                callback( nil, NSLocalizedString("error.unknown_error", comment: ""), false)
-                return
+        guard let request = createRequestSearch(text: text) else {
+            callback( nil, NSLocalizedString("error.unknown_error", comment: ""), false)
+            return
         }
-        
-        addSearchMovieListItems(text: text, queryItems: &queryItems)
-        
-        let url = "\(baseUrl)\(searchUrl)"
-        
-        let request = Request(endPoint: url,
-                              method: .get,
-                              queryItems: queryItems,
-                              header: nil)
         
         MovieApi.shared.request(request: request) { data, error in
             if error == nil, let content = data {

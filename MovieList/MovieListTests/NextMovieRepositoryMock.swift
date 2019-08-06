@@ -1,5 +1,5 @@
 //
-//  MainRepositoryMock.swift
+//  NextMovieRepositoryMock.swift
 //  MovieListTests
 //
 //  Created by Filipe Faria on 04/08/19.
@@ -9,12 +9,16 @@
 import Foundation
 @testable import MovieList
 
-class MainRepositoryMock: MainRepositoryProtocol {
+class NextMovieRepositoryMock: NextMovieRepositoryProtocol {
     
     var showMovieError: Bool = false
     var showGenreError: Bool = false
     var showSearchError: Bool = false
     var clearData: Bool = false
+    
+    func resetSearchData() {
+        
+    }
     
     func getGenres(callback: @escaping (GenreList?, String?) -> Void) {
         if showGenreError {

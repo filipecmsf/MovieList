@@ -24,7 +24,7 @@ class MainViewModel {
     var showError: ((String) -> Void)?
     
     // MARK: - setup methods
-    init(interactor: MainInteractor = MainInteractor(repository: MainRepository())) {
+    init(interactor: MainInteractor = MainInteractor(repository: NextMovieRepository())) {
         self.interactor = interactor
         implementInteractor()
         self.interactor.getGenres()
@@ -57,10 +57,6 @@ class MainViewModel {
             loadingMovies = true
             interactor.getMovies()
         }
-    }
-    
-    func getGenreList() -> [Genre] {
-        return interactor.getGenresList()
     }
     
     func getMovieBy(index: Int) -> MainMovieViewEntity? {

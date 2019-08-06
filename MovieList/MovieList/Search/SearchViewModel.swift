@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SeachViewModel {
+class SearchViewModel {
     
     // MARK: - properties
     internal var viewEntity: SearchViewEntity? {
@@ -16,9 +16,10 @@ class SeachViewModel {
             reloadTableView?()
         }
     }
-    var interactor: SearchInteractor
-    var text: String = ""
+
+    private var text: String = ""
     
+    var interactor: SearchInteractor
     var reloadTableView: (() -> Void)?
     var showError: ((String) -> Void)?
     

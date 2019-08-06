@@ -8,25 +8,14 @@
 
 import Foundation
 
-class MainInteractor {
+class MainInteractor: BaseInteractor {
     
     // MARK: - properties
-    private var movieList: [Movie] = []
     private var movieViewEntityList: [MainMovieViewEntity] = []
-    private var genreList: [Genre] = []
     private var highlightList: [Int] = []
     private let highlightLimit = 10
     
     var updateList: ((MainViewEntity) -> Void)?
-    var genresLoaded: (() -> Void)?
-    var showError: ((String) -> Void)?
-    
-    var mainRepository: MainRepositoryProtocol
-    
-    // MARK: - setup methods
-    init(repository: MainRepositoryProtocol) {
-        mainRepository = repository
-    }
     
     // MARK: - private methods
     private func updateMovieList(movieListObj: MovieList) {
@@ -54,21 +43,6 @@ class MainInteractor {
         return mainMovieViewEntityList
     }
     
-    private func getGenresNames(genres: [Int]) -> [String] {
-        var genreNameList: [String] = []
-        
-        for id in genres {
-            
-            guard let genre = genreList.first(where: { $0.id == id }) else {
-                break
-            }
-            
-            genreNameList.append(genre.name)
-        }
-        
-        return genreNameList
-    }
-    
     private func createHighlightList() -> [Int] {
         var highlightList: [Int] = []
         
@@ -86,11 +60,6 @@ class MainInteractor {
         self.showError?(msg)
     }
     
-    private func genders(genders: GenreList) {
-        self.genreList = genders.genres
-        self.genresLoaded?()
-    }
-    
     private func movies(movies: MovieList) {
         self.updateMovieList(movieListObj: movies)
     }
@@ -104,11 +73,6 @@ class MainInteractor {
     }
     
     // MARK: - public methods
-    
-    func getGenresList() -> [Genre] {
-        return genreList
-    }
-    
     func getMovieBy(id: Int) -> Movie? {
         return movieList.first { $0.id == id }
     }
@@ -122,16 +86,6 @@ class MainInteractor {
                 self.showError(msg: msg)
             } else if let movies = moviesList {
                 self.movies(movies: movies)
-            }
-        }
-    }
-    
-    func getGenres() {
-        mainRepository.getGenres { genresList, error in
-            if let msg = error, !msg.isEmpty {
-                self.showError(msg: msg)
-            } else if let genres = genresList {
-                self.genders(genders: genres)
             }
         }
     }

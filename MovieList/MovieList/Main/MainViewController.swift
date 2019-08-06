@@ -37,7 +37,7 @@ class MainViewController: UIViewController {
     
     private let detailViewSegueIdentifier = "movieDetailSegue"
     private let searchSegueIdentifier = "searchSegue"
-    private var viewModel = MainViewModel(interactor: MainInteractor(repository: MainRepository()))
+    private var viewModel = MainViewModel(interactor: MainInteractor(repository: NextMovieRepository()))
     
     @IBOutlet private weak var backgroundView: UIView! {
         didSet {
@@ -64,9 +64,6 @@ class MainViewController: UIViewController {
             let detailViewEntity = sender as?DetailViewEntity,
             let detailViewController = segue.destination as? DetailViewController {
             detailViewController.setViewEntity(detailViewEntity: detailViewEntity)
-        } else if segue.identifier == searchSegueIdentifier {
-            let searchViewController = segue.destination as? SearchViewController
-               searchViewController?.setGenres(genres: viewModel.getGenreList())
         }
     }
     
@@ -119,7 +116,7 @@ class MainViewController: UIViewController {
 // MARK: - extensions
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
-    // MARK: - TABLEVIEW METHODS
+    // MARK: - tableView methods
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -180,7 +177,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    // MARK: - AUXILIAR METHODS
+    // MARK: - auxiliar methods
     private func createHighlightCell() -> HighlightCell? {
         if let cell: HighlightCell = tableView.dequeueReusableCell(withIdentifier: "HighlightCell") as? HighlightCell {
             cell.setData(list: viewModel.getHighlightList())
