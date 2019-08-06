@@ -54,6 +54,10 @@ class SearchInteractor: BaseInteractor {
         movieViewEntityList = []
         mainRepository.resetSearchData()
         
+        if text.isEmpty {
+            updateList?(SearchViewEntity(movieList: []))
+        }
+        
         if genreList.isEmpty {
             getGenres()
         } else {
