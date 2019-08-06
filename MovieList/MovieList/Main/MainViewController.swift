@@ -36,6 +36,7 @@ class MainViewController: UIViewController {
     }
     
     private let detailViewSegueIdentifier = "movieDetailSegue"
+    private let searchSegueIdentifier = "searchSegue"
     private var viewModel = MainViewModel(interactor: MainInteractor(repository: MainRepository()))
     
     @IBOutlet private weak var backgroundView: UIView! {
@@ -63,6 +64,9 @@ class MainViewController: UIViewController {
             let detailViewEntity = sender as?DetailViewEntity,
             let detailViewController = segue.destination as? DetailViewController {
             detailViewController.setViewEntity(detailViewEntity: detailViewEntity)
+        } else if segue.identifier == searchSegueIdentifier {
+            let searchViewController = segue.destination as? SearchViewController
+               searchViewController?.setGenres(genres: viewModel.getGenreList())
         }
     }
     
@@ -163,7 +167,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 80
+        return section == 0 ? 40 : 80
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

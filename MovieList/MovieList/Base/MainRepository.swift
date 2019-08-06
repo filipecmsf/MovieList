@@ -1,5 +1,5 @@
 //
-//  MainRepository.swift
+//  MovieRepository.swift
 //  MovieList
 //
 //  Created by Filipe Faria on 04/08/19.
@@ -11,6 +11,7 @@ import Foundation
 protocol MainRepositoryProtocol {
     func getGenres(callback: @escaping (_ genres: GenreList?, _ error: String?) -> Void)
     func getMovies(callback: @escaping (_ movies: MovieList?, _ error: String?, _ clearData: Bool) -> Void)
+    func getSearchMovies(text: String, callback: @escaping (_ movies: MovieList?, _ error: String?, _ clearData: Bool) -> Void)
 }
 
 class MainRepository: MainRepositoryProtocol {
@@ -24,7 +25,7 @@ class MainRepository: MainRepositoryProtocol {
         totalPages = 100
     }
     
-    private func createQueryItems(withPage: Bool) -> [String: String]? {
+    private func createQueryItems() -> [String: String]? {
         guard let apiKey = Bundle.getValueFromInfo(key: .apiKey) else {
             return nil
         }
@@ -32,6 +33,11 @@ class MainRepository: MainRepositoryProtocol {
         let queryItems: [String: String] = ["api_key": apiKey]
         
         return queryItems
+    }
+    
+    private func addSearchMovieListItems(text: String, queryItems: inout [String: String]) {
+        queryItems["page"] = String(page)
+        queryItems["query"] = text
     }
     
     private func addMovieListItems(queryItems: inout [String: String]) {
@@ -52,16 +58,16 @@ class MainRepository: MainRepositoryProtocol {
         }
     }
     
-    private func retry() {
+    func resetSearchData() {
         page = 1
-//        getGenres()
+        totalPages = 100
     }
     
     func getGenres(callback: @escaping (_ genres: GenreList?, _ error: String?) -> Void) {
         
         guard let baseUrl = Bundle.getValueFromInfo(key: .baseUrl),
             let genreUrl = Bundle.getValueFromInfo(key: .genreUrl),
-            let queryItems = createQueryItems(withPage: false) else {
+            let queryItems = createQueryItems() else {
                 callback(nil, NSLocalizedString("error.unknown_error", comment: ""))
                 return
         }
@@ -90,13 +96,13 @@ class MainRepository: MainRepositoryProtocol {
     
     func getMovies(callback: @escaping (_ movies: MovieList?, _ error: String?, _ clearData: Bool) -> Void) {
         
-        if page >= totalPages {
+        if page > totalPages {
             return
         }
         
         guard let baseUrl = Bundle.getValueFromInfo(key: .baseUrl),
             let movieUrl = Bundle.getValueFromInfo(key: .movieUrl),
-            var queryItems = createQueryItems(withPage: true) else {
+            var queryItems = createQueryItems() else {
                 callback( nil, NSLocalizedString("error.unknown_error", comment: ""), false)
                 return
         }
@@ -104,6 +110,50 @@ class MainRepository: MainRepositoryProtocol {
         addMovieListItems(queryItems: &queryItems)
         
         let url = "\(baseUrl)\(movieUrl)"
+        
+        let request = Request(endPoint: url,
+                              method: .get,
+                              queryItems: queryItems,
+                              header: nil)
+        
+        MovieApi.shared.request(request: request) { data, error in
+            if error == nil, let content = data {
+                do {
+                    let movieListObj = try JSONDecoder().decode(MovieList.self, from: content)
+                    self.totalPages = movieListObj.totalPages
+                    self.page += 1
+                    callback(movieListObj, nil, false)
+                } catch let error {
+                    print(error)
+                    callback(nil, NSLocalizedString("error.unknown_error", comment: ""), false)
+                }
+            } else {
+                
+                if error?.statusCode == ErrorStatusCode.unprocessableEntity {
+                    callback(nil, nil, true)
+                    return
+                }
+                
+                callback(nil, self.handleError(error: error), false)
+            }
+        }
+    }
+    
+    func getSearchMovies(text: String, callback: @escaping (MovieList?, String?, Bool) -> Void) {
+        if page >= totalPages {
+            return
+        }
+        
+        guard let baseUrl = Bundle.getValueFromInfo(key: .baseUrl),
+            let searchUrl = Bundle.getValueFromInfo(key: .searchUrl),
+            var queryItems = createQueryItems() else {
+                callback( nil, NSLocalizedString("error.unknown_error", comment: ""), false)
+                return
+        }
+        
+        addSearchMovieListItems(text: text, queryItems: &queryItems)
+        
+        let url = "\(baseUrl)\(searchUrl)"
         
         let request = Request(endPoint: url,
                               method: .get,

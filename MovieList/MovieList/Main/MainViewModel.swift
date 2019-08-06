@@ -59,6 +59,10 @@ class MainViewModel {
         }
     }
     
+    func getGenreList() -> [Genre] {
+        return interactor.getGenresList()
+    }
+    
     func getMovieBy(index: Int) -> MainMovieViewEntity? {
         if let movie = viewEntity?.movieList[index] {
             return movie
@@ -73,7 +77,7 @@ class MainViewModel {
             return nil
         }
         
-        let detailViewEntity = DetailViewEntity(title: movie.title, posterPath: movie.posterPath, genresList: genderList, releaseDate: movie.releaseDate, overview: movie.overview, voteAverage: movie.voteAverage)
+        let detailViewEntity = DetailViewEntity(title: movie.title, posterPath: movie.posterPath, genresList: genderList, releaseDate: movie.releaseDate.formatDate(), overview: movie.overview, voteAverage: movie.voteAverage)
         
         return detailViewEntity
     }

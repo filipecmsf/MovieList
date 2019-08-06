@@ -56,4 +56,19 @@ class MovieCell: UITableViewCell {
         posterImage.af_setImage(withURL: url, placeholderImage: placeholderImage, imageTransition: .crossDissolve(0.4), runImageTransitionIfCached: true)
     }
     
+    func setData(searchMovieViewEntity: SearchMovieViewEntity) {
+        titleLabel.text = searchMovieViewEntity.title
+        releaseDateLabel.text = searchMovieViewEntity.releaseDate
+        genresLabel.text = searchMovieViewEntity.genreList.joined(separator: ", ")
+        
+        let placeholderImage = UIImage(named: "movie_placeholder")
+        guard let baseUrl = Bundle.getValueFromInfo(key: .imageUrl),
+            let posterPath = searchMovieViewEntity.posterPath,
+            let url = URL(string: String(format: "%@%@", baseUrl, posterPath)) else {
+                posterImage.image = placeholderImage
+                return
+        }
+        
+        posterImage.af_setImage(withURL: url, placeholderImage: placeholderImage, imageTransition: .crossDissolve(0.4), runImageTransitionIfCached: true)
+    }
 }

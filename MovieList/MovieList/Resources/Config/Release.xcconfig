@@ -13,6 +13,7 @@
 
 BASE_URL = api.themoviedb.org/3/
 MOVIE_URL = movie/upcoming
+SEARCH_URL = search/movie
 GENRE_URL = genre/movie/list
 IMAGE_URL = image.tmdb.org/t/p/w500
 APP_NAME = NextMovies

@@ -1,30 +1,25 @@
 //
-//  MainInteractor.swift
+//  SearchInteractor.swift
 //  MovieList
 //
-//  Created by Filipe Faria on 02/08/19.
+//  Created by Filipe Faria on 05/08/19.
 //  Copyright © 2019 Filipe Faria. All rights reserved.
 //
 
 import Foundation
 
-class MainInteractor {
+class SearchInteractor {
     
-    // MARK: - properties
+    var mainRepository: MainRepository
     private var movieList: [Movie] = []
-    private var movieViewEntityList: [MainMovieViewEntity] = []
     private var genreList: [Genre] = []
-    private var highlightList: [Int] = []
-    private let highlightLimit = 10
+    private var movieViewEntityList: [SearchMovieViewEntity] = []
     
-    var updateList: ((MainViewEntity) -> Void)?
+    var updateList: ((SearchViewEntity) -> Void)?
     var genresLoaded: (() -> Void)?
     var showError: ((String) -> Void)?
     
-    var mainRepository: MainRepositoryProtocol
-    
-    // MARK: - setup methods
-    init(repository: MainRepositoryProtocol) {
+    init(repository: MainRepository) {
         mainRepository = repository
     }
     
@@ -32,21 +27,17 @@ class MainInteractor {
     private func updateMovieList(movieListObj: MovieList) {
         movieList.append(contentsOf: movieListObj.results)
         movieViewEntityList.append(contentsOf: createMainMovieViewEntity(movieList: movieListObj.results))
-        
-        if highlightList.isEmpty {
-            highlightList = createHighlightList()
-        }
-        
-        updateList?(MainViewEntity(movieList: movieViewEntityList, highlightList: highlightList))
+
+        updateList?(SearchViewEntity(movieList: movieViewEntityList))
     }
     
-    private func createMainMovieViewEntity(movieList: [Movie]) -> [MainMovieViewEntity] {
-        var mainMovieViewEntityList: [MainMovieViewEntity] = []
+    private func createMainMovieViewEntity(movieList: [Movie]) -> [SearchMovieViewEntity] {
+        var mainMovieViewEntityList: [SearchMovieViewEntity] = []
         
         for movie in movieList {
             let genres = getGenresNames(genres: movie.genreIds)
             
-            let mainMovieViewEntity = MainMovieViewEntity(id: movie.id, title: movie.title, releaseDate: movie.releaseDate.formatDate(), posterPath: movie.posterPath, genreList: genres)
+            let mainMovieViewEntity = SearchMovieViewEntity(id: movie.id, title: movie.title, releaseDate: movie.releaseDate.formatDate(), posterPath: movie.posterPath, genreList: genres)
             
             mainMovieViewEntityList.append(mainMovieViewEntity)
         }
@@ -69,19 +60,6 @@ class MainInteractor {
         return genreNameList
     }
     
-    private func createHighlightList() -> [Int] {
-        var highlightList: [Int] = []
-        
-        repeat {
-            let position = Int.random(in: 0 ..< movieViewEntityList.count)
-            if !highlightList.contains(position) {
-                highlightList.append(position)
-            }
-        } while highlightList.count < highlightLimit
-        
-        return highlightList.sorted { $0 < $1 }
-    }
-    
     private func showError(msg: String) {
         self.showError?(msg)
     }
@@ -98,23 +76,26 @@ class MainInteractor {
     private func clearData() {
         movieViewEntityList = []
         movieList = []
-        highlightList = []
         genreList = []
         getGenres()
     }
     
     // MARK: - public methods
-    
-    func getGenresList() -> [Genre] {
-        return genreList
+    func searchMovie(text: String) {
+        
+        movieList = []
+        movieViewEntityList = []
+        
+        if genreList.isEmpty {
+            getGenres()
+        } else {
+            getMovies(text: text)
+        }
     }
     
-    func getMovieBy(id: Int) -> Movie? {
-        return movieList.first { $0.id == id }
-    }
-    
-    func getMovies() {
-        mainRepository.getMovies { moviesList, error, clearData in
+    func getMovies(text: String) {
+        mainRepository.resetSearchData()
+        mainRepository.getSearchMovies(text: text) { moviesList, error, clearData in
             if clearData {
                 self.clearData()
                 return
@@ -127,12 +108,16 @@ class MainInteractor {
     }
     
     func getGenres() {
-        mainRepository.getGenres { genresList, error in
+        mainRepository.getGenres { (genresList, error) in
             if let msg = error, !msg.isEmpty {
                 self.showError(msg: msg)
             } else if let genres = genresList {
                 self.genders(genders: genres)
             }
         }
+    }
+    
+    func getMovieBy(id: Int) -> Movie? {
+        return movieList.first { $0.id == id }
     }
 }

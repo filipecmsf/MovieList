@@ -23,3 +23,5 @@
 
 "alert.title" = "Ops";
 "alert.button" = "Ok";
+
+"search.search_placeholder" = "Movie name";
